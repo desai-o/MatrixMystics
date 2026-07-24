@@ -219,22 +219,10 @@ Requires JavaScript enabled. No internet is needed *except* to load KaTeX from `
 
 ## 🙏 Credits & Acknowledgments
 
-- **Course & Question Design:** The Matrix Mystics team and the broader *CodersHigh* teaching community.
+- **Course & Question Design:** Professor S.R.S Iyengar, the CodersHigh team and the broader VLED community.
 - **Math Rendering:** [KaTeX](https://katex.org/) — the fastest math typesetting library for the web.
 - **Visualization Tool:** [GeoGebra](https://www.geogebra.org/).
 - **Community Hub:** [Samagama](https://samagama.in/) & the [Matrix Mystics Discourse forum](https://vicharanashala.discourse.group/t/matrix-mystics-discussion-forum/516).
-- **Inspiration:** Every student who ever wondered *"But what is a matrix, really?"* 🤓
-
----
-
-## 📝 Contributing
-
-This file is meant to be filled in collaboratively. To contribute an explanation:
-
-1. Find the relevant `<div class="answer-wrap">` block in `CodersHigh.html`.
-2. Replace `<p>Placeholder solution for MxQy.</p>` with your KaTeX-enabled walkthrough.
-3. Test by opening the file locally and clicking **Reveal Explanation**.
-4. Submit a pull request. 🎉
 
 ---
 
