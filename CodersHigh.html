@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Matrix Mystics Solutions</title>
+<style>
+*{box-sizing:border-box}html{overscroll-behavior: none;scroll-behavior:smooth}
+body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,sans-serif;background:#f5efe3;color:#3f3526;overscroll-behavior-y:none;overflow-x:hidden}
+html,body{height:100%}
+.layout{
+    display:flex;
+    width:100%;
+    min-height:100vh;
+}
+.madewith{font-family:ui-monospace,'SF Mono','Cascadia Code','Consolas','Monaco',monospace;font-size:10px;color:#8b7355;text-align:center;padding:0 10px 5px;letter-spacing:.3px;margin:0 0 8px -10px;position:relative;top:-18px}
+.sidebar{width:260px;position:sticky;top:0;height:100vh;overflow:auto;padding:20px;background:#f5efe3;display:flex;flex-direction:column;text-align:center;scrollbar-width:none;-ms-overflow-style:none}
+.sidebar::-webkit-scrollbar{display:none;width:0;height:0}
+.sidebar h2{margin:0 0 16px;color:#6b4f2a}
+.sidebar details{margin:8px 0}.sidebar summary{cursor:pointer;font-weight:600;padding:6px;list-style:none}
+.sidebar summary::-webkit-details-marker{display:none}
+.sidebar ul{list-style:none;padding-left:18px;text-align:left}.sidebar a{text-decoration:none;color:#5b4022}
+.sidebar-links{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:20px;
+    align-items:center;
+    justify-content:center;
+}
+.sidebar-links a{display:inline-block;text-align:center;padding:0;font-size:13px;color:#6b4f2a;text-decoration:none;font-weight:600;background:none;box-shadow:none}
+.sidebar-links a:hover{text-decoration:underline;opacity:.9}
+.main{flex:1;padding:40px}
+.card{background:#fbf7ef;border:1px solid #d8c8a8;border-radius:14px;padding:28px;margin-bottom:28px;box-shadow:0 4px 14px rgba(0,0,0,.06)}
+.question-id{font-size:24px;font-weight:700;color:#6b4f2a;margin-bottom:16px}
+.question{font-size:15.5px;line-height:1.8}
+.module-heading{font-size:30px;font-weight:700;color:#6b4f2a;margin:6px 0 22px;padding:6px 0 10px;border-bottom:2px solid #d8c8a8;letter-spacing:1px;text-align:center}
+.toggle{margin-top:22px;background:#fbf7ef;border:1px solid #d8c8a8;color:#6b4f2a;font-weight:600;cursor:pointer;font-size:15px;padding:6px 16px;border-radius:8px;transition:background .2s ease,border-color .2s ease}
+.toggle:hover{background:#f2eadb;border-color:#9d7a4b}
+.answer-wrap{display:block;height:0;overflow:hidden;opacity:0;max-height:0;transition:height .95s cubic-bezier(.22,1,.36,1),opacity .75s ease,max-height .95s cubic-bezier(.22,1,.36,1);margin-top:14px;margin-bottom:18px;padding:0}
+.answer{padding:18px 20px;line-height:1.8;background:transparent;color:#3f3526;border:1px solid rgba(109,79,42,0.12);border-radius:12px}
+.math{background:#f2eadb;border-left:4px solid #9d7a4b;padding:10px 14px;border-radius:6px;margin:14px 0}
+.madewith{cursor:pointer;transition:color .25s ease,letter-spacing .25s ease,transform .25s ease}
+.madewith:hover{color:#6b4f2a;letter-spacing:.6px;transform:scale(1.04)}
+.fireworks{position:fixed;inset:0;width:100vw;height:100vh;pointer-events:none;z-index:9999;display:none}
+</style>
+<link rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+
+<script defer
+src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+
+<script defer
+src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+onload="renderMathInElement(document.body);"></script>
+</head>
+<body>
+<div class="layout">
+<aside class="sidebar">
+<div class="sidebar-links">
+<a href="https://www.geogebra.org" target="_blank" rel="noopener noreferrer">GeoGebra</a>
+<a href="https://vicharanashala.discourse.group/t/matrix-mystics-discussion-forum/516" target="_blank" rel="noopener noreferrer">Discourse</a>
+<a href="https://samagama.in/" target="_blank" rel="noopener noreferrer">Samagama</a>
+</div>
+<details open><summary>Module 1</summary><ul>
+<li><a href="#M1">Question 1</a></li>
+<li><a href="#M1Q2">Question 2</a></li>
+<li><a href="#M1Q3">Question 3</a></li>
+<li><a href="#M1Q4">Question 4</a></li>
+<li><a href="#M1Q5">Question 5</a></li>
+<li><a href="#M1Q6">Question 6</a></li>
+<li><a href="#M1Q7">Question 7</a></li>
+<li><a href="#M1Q8">Question 8</a></li>
+<li><a href="#M1Q9">Question 9</a></li>
+<li><a href="#M1Q10">Question 10</a></li>
+<li><a href="#M1Q11">Question 11</a></li>
+<li><a href="#M1Q12">Question 12</a></li>
+<li><a href="#M1Q13">Question 13</a></li>
+<li><a href="#M1Q14">Question 14</a></li>
+<li><a href="#M1Q15">Question 15</a></li>
+<li><a href="#M1Q16">Question 16</a></li>
+</ul></details><details open><summary>Module 2</summary><ul>
+<li><a href="#M2">Question 1</a></li>
+<li><a href="#M2Q2">Question 2</a></li>
+<li><a href="#M2Q3">Question 3</a></li>
+<li><a href="#M2Q4">Question 4</a></li>
+<li><a href="#M2Q5">Question 5</a></li>
+<li><a href="#M2Q6">Question 6</a></li>
+<li><a href="#M2Q7">Question 7</a></li>
+</ul></details><details open><summary>Module 3</summary><ul>
+<li><a href="#M3">Question 1</a></li>
+<li><a href="#M3Q2">Question 2</a></li>
+<li><a href="#M3Q3">Question 3</a></li>
+<li><a href="#M3Q4">Question 4</a></li>
+<li><a href="#M3Q5">Question 5</a></li>
+<li><a href="#M3Q6">Question 6</a></li>
+<li><a href="#M3Q7">Question 7</a></li>
+<li><a href="#M3Q8">Question 8</a></li>
+<li><a href="#M3Q9">Question 9</a></li>
+<li><a href="#M3Q10">Question 10</a></li>
+<li><a href="#M3Q11">Question 11</a></li>
+<li><a href="#M3Q12">Question 12</a></li>
+<li><a href="#M3Q13">Question 13</a></li>
+<li><a href="#M3Q14">Question 14</a></li>
+<li><a href="#M3Q15">Question 15</a></li>
+</ul></details><details open><summary>Module 4</summary><ul>
+<li><a href="#M4">Question 1</a></li>
+<li><a href="#M4Q2">Question 2</a></li>
+<li><a href="#M4Q3">Question 3</a></li>
+<li><a href="#M4Q4">Question 4</a></li>
+<li><a href="#M4Q5">Question 5</a></li>
+<li><a href="#M4Q6">Question 6</a></li>
+<li><a href="#M4Q7">Question 7</a></li>
+</ul></details><details open><summary>Module 5</summary><ul>
+<li><a href="#M5">Question 1</a></li>
+<li><a href="#M5Q2">Question 2</a></li>
+<li><a href="#M5Q3">Question 3</a></li>
+<li><a href="#M5Q4">Question 4</a></li>
+<li><a href="#M5Q5">Question 5</a></li>
+</ul></details><details open><summary>Module 6</summary><ul>
+<li><a href="#M6">Question 1</a></li>
+<li><a href="#M6Q2">Question 2</a></li>
+<li><a href="#M6Q3">Question 3</a></li>
+</ul></details>
+</aside>
+<main class="main">
+<div class="madewith">Made with ❤️ for the love of teaching & learning</div>
+<div class="module-heading" id="M1">Module 1</div>
+<div class="card" id="M1Q1">
+<div class="question-id">M1Q1</div>
+<div class="question">
+Ram and Lakshman were two brothers, Ram’s pocket money was twice as much as Lakshman. The good boys that Ram and Lakshman were, they never spend their pocket money on anything. They instead saved the same in their piggy bank. Every week, they would check their savings so far. Assume the first week’s savings was (R1,L1)
+and second week’s was (R2,L2) and so on. They try plotting their weekly savings on a graph sheet. How will the points look like?
+<br><br><b>Use GeoGebra and try to visualize how the plotted points would look over a timeline of several weeks?</b>
+</div>
+<button class="toggle">Reveal Explanation</button>
+<div class="answer-wrap"><div class="answer">
+<h4>Understand how to convert above given data into points on a graph?</h4>
+<h5>We are basically learning the concept of converting simple real-world information into algebraic relationships (equations), which can then be represented and analyzed as points on the coordinate plane!</h5>
+
+<p>
+Let Lakshman's weekly saving be \(L\).
+Then Ram saves \(R = 2L\) per week
+<br>
+(since Ram's pocket money is twice than Lakshman, and both of them never spend their pocket money - this makes their savings stay constantly proportional).
+</p>
+
+<h3>Weekly Savings Represented as Coordinate Points</h3>
+
+<table class="solution-table">
+    <thead>
+        <tr>
+            <th>Week</th>
+            <th>Ram (R)</th>
+            <th>Lakshman (L)</th>
+            <th>Point (R, L)</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td>2</td>
+            <td>1</td>
+            <td>\((2,1)\)</td>
+        </tr>
+
+        <tr>
+            <td>2</td>
+            <td>4</td>
+            <td>2</td>
+            <td>\((4,2)\)</td>
+        </tr>
+
+        <tr>
+            <td>3</td>
+            <td>6</td>
+            <td>3</td>
+            <td>\((6,3)\)</td>
+        </tr>
+
+        <tr>
+            <td>4</td>
+            <td>8</td>
+            <td>4</td>
+            <td>\((8,4)\)</td>
+        </tr>
+
+        <tr>
+            <td>\(n\)</td>
+            <td>\(2n\)</td>
+            <td>\(n\)</td>
+            <td>\((2n,n)\)</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>Observation</h3>
+
+<p>
+All points lie on the straight line:
+</p>
+
+\[
+\boxed{
+L=\frac{1}{2}R
+\qquad
+\text{or}
+\qquad
+R=2L
+}
+\]
+
+<p>
+The points form a straight line through the origin with slope
+\(\frac12\).
+</p>
+<div class="math"><b>R = 2L</b></div>
+This is the equation of a straight line through the origin, so every plotted point lies on the same straight line.
+</div></div>
+</div>
+<div class="card" id="M1Q2">
+<div class="question-id">M1Q2</div>
+<div class="question">
+Atul's house is centered at origin \((0,0)\) he walks straight (along the x-axis) for 2 units and then takes a left and walks 1 unit to reach Bala's house, after that he takes a right turn and walks for one unit and then a left turn and walks for one unit and reaches Chetan's house. He continues in a similar style, takes a right turn 1 unit and then left turn one unit and reaches Divya's house. Are the houses of Bala, Chetan and Divya on a straight line? What is the equation of this line? Plot this on Geogebra.
+</div>
+<button class="toggle">Reveal Explanation</button>
+<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M1Q2.</p></div></div>
+</div>
+<div class="card" id="M1Q3">
+<div class="question-id">M1Q3</div>
+<div class="question">
+Plot the lines \(y = x\), \(y = 2x\), \(y = 10x\).
+</div>
+<button class="toggle">Reveal Explanation</button>
+<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M1Q3.</p></div></div>
+</div>
+<div class="card" id="M1Q4">
+<div class="question-id">M1Q4</div>
+<div class="question">
+Observe that they all pass through the origin. Why?
+</div>
+<button class="toggle">Reveal Explanation</button>
+<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M1Q4.</p></div></div>
+</div>
+<div class="card" id="M1Q5">
+<div class="question-id">M1Q5</div>
+<div class="question">
+Plot \(y = 2x + 1\). Observe, why doesn't it pass through the origin?
+</div>
+<button class="toggle">Reveal Explanation</button>
+<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M1Q5.</p></div></div>
+</div>
+<div class="card" id="M1Q6">
+<div class="question-id">M1Q6</div>
+<div class="question">
+Plot \(y = ax + b\), with \(a\) and \(b\) as parameters which you should be able to vary. What do you observe?
+</div>
+<button class="toggle">Reveal Explanation</button>
+<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M1Q6.</p></div></div>
+</div>
+<div class="card" id="M1Q7">
+<div class="question-id">M1Q7</div>
+<div class="question">
+Consider the following simultaneous equation:
+<div class="math">\[2x + 3y = 7\]</div>
+<div class="math">\[3x + 4y = 10\]</div>
+Do you see a \(2 \times 2\) matrix here? What is the importance of seeing a matrix in this problem? Why study matrices in general?
+<br><br>Do you observe that this problem can be retold as:
+<div class="math">\[\begin{pmatrix} 2 & 3 \\ 3 & 4 \end{pmatrix} \begin{pmatrix} x \\ y \end{pmatrix} = \begin{pmatrix} 7 \\ 10 \end{pmatrix}\]</div>
+</div>
+<button class="toggle">Reveal Explanation</button>
+<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M1Q7.</p></div></div>
+</div>
+<div class="card" id="M1Q8">
+<div class="question-id">M1Q8</div>
+<div class="question">
+Consider a simple function \(f(x) = 3x + 2\). This function is invertible right? Can you tell us what is \(\alpha\) such that \(f(\alpha) = 17\)? Is such an \(\alpha\) unique? How did you find such an \(\alpha\)? Is this always possible?
+</div>
+<button class="toggle">Reveal Explanation</button>
+<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M1Q8.</p></div></div>
+</div>
+<div class="card" id="M1Q9">
+<div class="question-id">M1Q9</div>
+<div class="question">
+Consider the function \(f(x) = x^2 - 10\), what is \(f(5)\)?
+</div>
+<button class="toggle">Reveal Explanation</button>
+<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M1Q9.</p></div></div>
+</div>
+<div class="card" id="M1Q10">
+<div class="question-id">M1Q10</div>
+<div class="question">
+Consider the function \(f(x) = x^2 - 10\), if \(f(\alpha) = 54\), what is \(\alpha\)?
+</div>
+<button class="toggle">Reveal Explanation</button>
+<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M1Q10.</p></div></div>
+</div>
+<div class="card" id="M1Q11">
+<div class="question-id">M1Q11</div>
+<div class="question">
+Consider the function \(g(x) = x^3 - x^2 - 10x + 2\), if \(g(x) = -22\) what is \(x\)?
+</div>
+<button class="toggle">Reveal Explanation</button>
+<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M1Q11.</p></div></div>
+</div>
+<div class="card" id="M1Q12">
+<div class="question-id">M1Q12</div>
+<div class="question">
+Do you know what is \(\mathbb{R}\), \(\mathbb{R}^2\) and \(\mathbb{R}^3\)?
+</div>
+<button class="toggle">Reveal Explanation</button>
+<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M1Q12.</p></div></div>
+</div>
+<div class="card" id="M1Q13">
+<div class="question-id">M1Q13</div>
+<div class="question">
+Consider the function \(\phi : \mathbb{R}^2 \to \mathbb{R}^2\) defined by \(\phi(x, y) = (2x + 3y, 3x + 4y)\). What has this to do with the previous question?
+</div>
+<button class="toggle">Reveal Explanation</button>
+<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M1Q13.</p></div></div>
+</div>
+<div class="card" id="M1Q14">
+<div class="question-id">M1Q14</div>
+<div class="question">
+Is the function \(\phi\) invertible? In the question above on matrices, we see that it is of the form \(A\vec{x} = b\). Note that we can invert the matrix, using the method that was taught to us in our high school to find out the value for the variables \(x\) and \(y\). This is one of the many applications of matrices.
+</div>
+<button class="toggle">Reveal Explanation</button>
+<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M1Q14.</p></div></div>
+</div>
+<div class="card" id="M1Q15">
+<div class="question-id">M1Q15</div>
+<div class="question">
+We will now see matrices as functions. Instead of \(\phi\) we will write the matrix itself:
+<div class="math">\[\begin{pmatrix} 2 & 3 \\ 3 & 4 \end{pmatrix} : \mathbb{R}^2 \to \mathbb{R}^2\]</div>
+</div>
+<button class="toggle">Reveal Explanation</button>
+<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M1Q15.</p></div></div>
+</div>
+<div class="card" id="M1Q16">
+<div class="question-id">M1Q16</div>
+<div class="question">
+Consider the function \(\begin{pmatrix} 1 & 2 \\ 2 & 4 \end{pmatrix} : \mathbb{R}^2 \to \mathbb{R}^2\). This matrix takes a few elements to the origin. What are those elements? Plot this using Geogebra.
+</div>
+<button class="toggle">Reveal Explanation</button>
+<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M1Q16.</p></div></div>
+</div>
+<div class="module-heading" id="M2">Module 2</div>
+<div class="card" id="M2Q1">
+<div class="question-id">M2Q1</div>
+<div class="question">
+\(A\) is assigned \(0\), \(B:1\), \(C:2\), and so on up to \(Z:25\).
+<br><br>
+Assume you denoted every letter with a number, as given in the table above. You need to encrypt the word \(SUDARSHANA\) which stands for the numbers: \(18, 20, 3, 0, 17, 18, 7, 0, 13, 0\).
+<br><br>
+You encrypt this using a matrix given by:
+<div class="math">\[\begin{pmatrix} 2 & 3 \\ 3 & 4 \end{pmatrix}\]</div>
+So \(SUDARSHANA\) will end up becoming: \(96, 134, 6, 9, 88, 123, 14, 21, 26, 39\).
+<br><br>
+Given these numbers, how will you decrypt the message and get back \(SUDARSHANA\)? This is a well known cryptographic protocol called the <b>Hill Cipher</b>. You can read more online.
+</div>
+<button class="toggle">Reveal Explanation</button>
+<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M2Q1.</p></div></div>
+</div>
+<div class="card" id="M2Q2">
+<div class="question-id">M2Q2</div>
+<div class="question">
+We encounter equations very often in our lives. Consider for example, the following situation at <b><i>Baker's Cafe</i></b>. The manager has a very important estimate to make. Mostly, visitors at his cafe happen to be families and they are often comprised of Children and/or Adults. He observes that there are 3 adults and 1 child at a table and their bill turns out to be Rs.1200/-. There is yet another table with 2 children and 1 adult and their bill comes out to be Rs.1000/-. Can the manager estimate the consumption of a Child/Adult? This is popularly called the <i>Simultaneous Equations</i> and we all remember from our school days, multiple ways in which these can be solved.
+<br><br>
+<div class="math">\[3A + 1C = 1200\]</div>
+<div class="math">\[1A + 2C = 1000\]</div>
+</div>
+<button class="toggle">Reveal Explanation</button>
+<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M2Q2.</p></div></div>
+</div>
+<div class="card" id="M2Q3">
+<div class="question-id">M2Q3</div>
+<div class="question">
+While we were taught the so called two variables and two unknowns, what if there were more equations than unknowns?
+<br><br>
+<div class="math">\[3A + 1C = 1200\]</div>
+<div class="math">\[1A + 2C = 1000\]</div>
+<div class="math">\[1A + 1C = 900\]</div>
+</div>
+<button class="toggle">Reveal Explanation</button>
+<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M2Q3.</p></div></div>
+</div>
+<div class="card" id="M2Q4">
+<div class="question-id">M2Q4</div>
+<div class="question">
+Note that the previous question can be modelled as a matrix:
+<br><br>
+<div class="math">\[3A + 1C = 1200\]</div>
+<div class="math">\[1A + 2C = 1000\]</div>
+<div class="math">\[1A + 1C = 900\]</div>
+<br>
+<u>Observe</u> this is same as:
+<div class="math">\[\begin{pmatrix} 3 & 1 \\ 1 & 2 \\ 1 & 1 \end{pmatrix} \begin{pmatrix} A \\ C \end{pmatrix} = \begin{pmatrix} 1200 \\ 1000 \\ 900 \end{pmatrix}\]</div>
+</div>
+<button class="toggle">Reveal Explanation</button>
+<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M2Q4.</p></div></div>
+</div>
+<div class="card" id="M2Q5">
+<div class="question-id">M2Q5</div>
+<div class="question">
+One obvious way to solve this, is to guess the values <span style="font-size:18px">&#x1F609;</span>. Can you get closer to the solution by guessing? Note that there is no solution to this question. You can just reduce the error. Do you see why?
+</div>
+<button class="toggle">Reveal Explanation</button>
+<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M2Q5.</p></div></div>
+</div>
+<div class="card" id="M2Q6">
+<div class="question-id">M2Q6</div>
+<div class="question">
+In the figure below:
+<br><br>
+<img src="https://sudarshansudarshan.github.io/codershigh/assets/markov2.png" alt="markov2 figure" style="max-width:75%;border-radius:10px;display:block;margin:14px auto;height:auto">
+<br><br>
+If 1000 people were to start in one state, what will be the distribution of people eventually?
+</div>
+<button class="toggle">Reveal Explanation</button>
+<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M2Q6.</p></div></div>
+</div>
+<div class="card" id="M2Q7">
+<div class="question-id">M2Q7</div>
+<div class="question">
+In the figure below:
+<br><br>
+<img src="https://sudarshansudarshan.github.io/codershigh/assets/markov3.png" alt="markov3 figure" style="max-width:56%;border-radius:10px;display:block;margin:14px auto;height:auto">
+<br><br>
+If 1000 people were to start in one state, what will be the distribution of people eventually?
+</div>
+<button class="toggle">Reveal Explanation</button>
+<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M2Q7.</p></div></div>
+</div>
+<div class="module-heading" id="M3">Module 3</div>
+<div class="card" id="M3Q1">
+<div class="question-id">M3Q1</div>
+<div class="question">
+<b>Use Geogebra:</b>
+<br>Draw the vector \(\begin{bmatrix} 1 \\ 1 \end{bmatrix}\). Find out all those vectors which are perpendicular to this vector.
+</div>
+<button class="toggle">Reveal Explanation</button>
+<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M3Q1.</p></div></div>
+</div>
+
+<div class="card" id="M3Q2">
+<div class="question-id">M3Q2</div>
+<div class="question">
+Do you observe that we are asking for vectors \(\begin{bmatrix} x \\ y \end{bmatrix}\) such that,
+<div class="math">\[\begin{bmatrix} 1 & 1 \end{bmatrix} \begin{bmatrix} x \\ y \end{bmatrix} = 0\]</div>
+</div>
+<button class="toggle">Reveal Explanation</button>
+<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M3Q2.</p></div></div>
+</div>
+
+<div class="card" id="M3Q3">
+<div class="question-id">M3Q3</div>
+<div class="question">
+Use Geogebra and solve the above question with \(\begin{bmatrix} 1 \\ 1 \end{bmatrix}\) replaced by \(\begin{bmatrix} a \\ b \end{bmatrix}\). Use \((a, b)\) as parameters and check what happens to \((x, y)\).
+</div>
+<button class="toggle">Reveal Explanation</button>
+<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M3Q3.</p></div></div>
+</div>
+
+<div class="card" id="M3Q4">
+<div class="question-id">M3Q4</div>
+<div class="question">
+What is \((x, y, z)\) satisfying the following equation? (Use Geogebra)
+<div class="math">\[\begin{bmatrix} 1 & 2 & 3 \end{bmatrix} \begin{bmatrix} x \\ y \\ z \end{bmatrix} = 0\]</div>
+</div>
+<button class="toggle">Reveal Explanation</button>
+<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M3Q4.</p></div></div>
+</div>
+
+<div class="card" id="M3Q5">
+<div class="question-id">M3Q5</div>
+<div class="question">
+Use Geogebra and plot all the points in the set below.
+<div class="math">\[T = \{ \alpha (1, 2, 1) \mid \alpha \in \mathbb{R} \}\]</div>
+</div>
+<button class="toggle">Reveal Explanation</button>
+<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M3Q5.</p></div></div>
+</div>
+
+<div class="card" id="M3Q6">
+<div class="question-id">M3Q6</div>
+<div class="question">
+Use Geogebra and plot all the points in the set below.
+<div class="math">\[S = \{ \beta (2, 7, 3) \mid \beta \in \mathbb{R} \}\]</div>
+</div>
+<button class="toggle">Reveal Explanation</button>
+<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M3Q6.</p></div></div>
+</div>
+
+<div class="card" id="M3Q7">
+<div class="question-id">M3Q7</div>
+<div class="question">
+Use Geogebra and plot all the points in the set below.
+<div class="math">\[W = \{ \alpha (1, 2, 1) + \beta (2, 7, 3) \mid \alpha, \beta \in \mathbb{R} \}\]</div>
+</div>
+<button class="toggle">Reveal Explanation</button>
+<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M3Q7.</p></div></div>
+</div>
+
+<div class="card" id="M3Q8">
+<div class="question-id">M3Q8</div>
+<div class="question">
+In the set \(W\) of previous question, find out all the points \((x, y, z)\) satisfying the following: (Use Geogebra)
+<div class="math">\[\begin{bmatrix} w_1 & w_2 & w_3 \end{bmatrix} \begin{bmatrix} x \\ y \\ z \end{bmatrix} = 0\]</div>
+where \((w_1, w_2, w_3) \in W\). Note that \(w_i\)'s are real numbers.
+</div>
+<button class="toggle">Reveal Explanation</button>
+<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M3Q8.</p></div></div>
+</div>
+
+<div class="card" id="M3Q9">
+<div class="question-id">M3Q9</div>
+<div class="question">
+Given the matrix \(A = \begin{bmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \\ 7 & 8 & 9 \end{bmatrix}\), find out all the possible \((x, y, z)\) such that:
+<div class="math">\[\begin{bmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \\ 7 & 8 & 9 \end{bmatrix} \begin{bmatrix} x \\ y \\ z \end{bmatrix} = 0\]</div>
+Observe carefully, what has this question got to do with previous five questions in this module.
+</div>
+<button class="toggle">Reveal Explanation</button>
+<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M3Q9.</p></div></div>
+</div>
+
+<div class="card" id="M3Q10">
+<div class="question-id">M3Q10</div>
+<div class="question">
+Given the matrix \(A = \begin{bmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \\ 7 & 8 & 9 \end{bmatrix}\) what does the following three sets represent? Use only Geogebra :)
+<ul>
+<li>\(\mathscr{R} = \{ \alpha (1,2,3) + \beta (4,5,6) + \gamma (7,8,9) \mid \alpha, \beta, \gamma \in \mathbb{R} \}\)</li>
+<li>\(C = \{ \alpha (1,4,7) + \beta (2,5,8) + \gamma (3,6,9) \mid \alpha, \beta, \gamma \in \mathbb{R} \}\)</li>
+<li>\(N = \{ (x, y, z) \mid x (1,4,7) + y (2,5,8) + z (3,6,9) = 0 \}\)</li>
+</ul>
+</div>
+<button class="toggle">Reveal Explanation</button>
+<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M3Q10.</p></div></div>
+</div>
+
+<div class="card" id="M3Q11">
+<div class="question-id">M3Q11</div>
+<div class="question">
+Did you observe that every vector of \(\mathscr{R}\) is perpendicular to every vector of \(N\)?
+</div>
+<button class="toggle">Reveal Explanation</button>
+<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M3Q11.</p></div></div>
+</div>
+
+<div class="card" id="M3Q12">
+<div class="question-id">M3Q12</div>
+<div class="question">
+Consider the matrix \(B = \begin{bmatrix} 1 & 2 \\ 2 & 4 \end{bmatrix}\). Draw the line \(2y + x = 4\). Seeing the matrix \(B\) as a function \(B : \mathbb{R}^2 \to \mathbb{R}^2\), where does \(B\) take the line \(2y + x = 4\)?
+<br><br>Where does it take:
+<ul>
+<li>i) \(2y + x = 10\)</li>
+<li>ii) \(2y + x = 62\)</li>
+<li>iii) \(2y + x = 1800\)</li>
+</ul>
+</div>
+<button class="toggle">Reveal Explanation</button>
+<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M3Q12.</p></div></div>
+</div>
+
+<div class="card" id="M3Q13">
+<div class="question-id">M3Q13</div>
+<div class="question">
+In general \(B = \begin{bmatrix} 1 & 2 \\ 2 & 4 \end{bmatrix} : \mathbb{R}^2 \to \mathbb{R}^2\), where does this function take \(2y + x = k\)? (where \(k\) is a constant)
+</div>
+<button class="toggle">Reveal Explanation</button>
+<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M3Q13.</p></div></div>
+</div>
+
+<div class="card" id="M3Q14">
+<div class="question-id">M3Q14</div>
+<div class="question">
+Given \(B = \begin{bmatrix} 1 & 2 \\ 2 & 4 \end{bmatrix} : \mathbb{R}^2 \to \mathbb{R}^2\). What is the range of this function?
+</div>
+<button class="toggle">Reveal Explanation</button>
+<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M3Q14.</p></div></div>
+</div>
+
+<div class="card" id="M3Q15">
+<div class="question-id">M3Q15</div>
+<div class="question">
+You have achieved the required wisdom if you have realized that:
+<div class="math">\[B = \begin{bmatrix} 1 & 2 \\ 2 & 4 \end{bmatrix} : \mathbb{R}^2 \to \mathbb{R}^2\]</div>
+"&nbsp;\(B\) collapses a dimension."
+</div>
+<button class="toggle">Reveal Explanation</button>
+<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M3Q15.</p></div></div>
+</div>
+
+<div class="module-heading" id="M4">Module 4</div>
+<div class="card" id="M4Q1">
+<div class="question-id">M4Q1</div>
+<div class="question">
+Given the matrix \(M = \begin{bmatrix} 1 & 3 \\ 2 & 6 \end{bmatrix}\). Use Geogebra to plot \(\mathscr{R}\), \(\mathscr{C}\) & \(\mathscr{N}\). What do you observe?
+<ul>
+<li>\(\mathscr{R} = \{ \alpha (1,3) + \beta (2,6) \mid \alpha, \beta \in \mathbb{R} \}\)</li>
+<li>\(\mathscr{C} = \{ \alpha (1,2) + \beta (3,6) \mid \alpha, \beta \in \mathbb{R} \}\)</li>
+<li>\(\mathscr{N} = \{ (x,y) \mid x(1,2) + y(3,6) = 0, \forall x, y \in \mathbb{R} \}\)</li>
+</ul>
+</div>
+<button class="toggle">Reveal Explanation</button>
+<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M4Q1.</p></div></div>
+</div>
+
+<div class="card" id="M4Q2">
+<div class="question-id">M4Q2</div>
+<div class="question">
+Note that \(\mathscr{R}\) and \(\mathscr{N}\) are orthogonal.
+</div>
+<button class="toggle">Reveal Explanation</button>
+<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M4Q2.</p></div></div>
+</div>
+
+<div class="card" id="M4Q3">
+<div class="question-id">M4Q3</div>
+<div class="question">
+What is the null-space of \(M = \begin{bmatrix} 1 & 3 \\ 2 & 6 \end{bmatrix}\) & the null-space of \(M^T\)?
+</div>
+<button class="toggle">Reveal Explanation</button>
+<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M4Q3.</p></div></div>
+</div>
+
+<div class="card" id="M4Q4">
+<div class="question-id">M4Q4</div>
+<div class="question">
+Do you observe that \(C(M) \perp N(M^T)\), \(R(M) \perp N(M)\)? <span style="font-size:18px">&#x1F609;</span>
+</div>
+<button class="toggle">Reveal Explanation</button>
+<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M4Q4.</p></div></div>
+</div>
+
+<div class="card" id="M4Q5">
+<div class="question-id">M4Q5</div>
+<div class="question">
+Consider \(A = \begin{bmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \\ 7 & 8 & 9 \end{bmatrix}\). What is \(N(A)\), \(C(A)\), \(R(A)\), \(N(A^T)\).
+</div>
+<button class="toggle">Reveal Explanation</button>
+<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M4Q5.</p></div></div>
+</div>
+
+<div class="card" id="M4Q6">
+<div class="question-id">M4Q6</div>
+<div class="question">
+Consider a \(4 \times 4\) matrix \(M : \mathbb{R}^4 \to \mathbb{R}^4\) whose range is:
+<ul>
+<li>a) 4-Dimension</li>
+<li>b) 3-Dimension</li>
+<li>c) 2-Dimension</li>
+<li>d) 1-Dimension</li>
+<li>e) 0-Dimension</li>
+</ul>
+Give an example each for all the above 5 cases.
+</div>
+<button class="toggle">Reveal Explanation</button>
+<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M4Q6.</p></div></div>
+</div>
+
+<div class="card" id="M4Q7">
+<div class="question-id">M4Q7</div>
+<div class="question">
+Consider \(A : \mathbb{R}^3 \to \mathbb{R}^3\).
+<br><br>
+a) Show that if the range contains a point \((a, b, c)\), then it should contain the entire set \(S\), defined by:
+<div class="math">\[S = \{ \alpha (a, b, c) \mid \alpha \in \mathbb{R} \}\]</div>
+<br>
+b) Show that if the range contains the points \((a, b, c)\) and \((d, e, f)\), then the range contains the entire set \(T\) defined by:
+<div class="math">\[T = \{ \alpha (a, b, c) + \beta (d, e, f) \mid \alpha, \beta \in \mathbb{R} \}\]</div>
+<br>
+c) Note: \(S\) is of the dimension 1, but \(T\) needn't be of dimension 2. Think!
+</div>
+<button class="toggle">Reveal Explanation</button>
+<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M4Q7.</p></div></div>
+</div>
+
+<div class="module-heading" id="M5">Module 5</div>
+<div class="card" id="M5Q1">
+<div class="question-id">M5Q1</div>
+<div class="question">
+Give an example of two 2-dim subspaces in \(\mathbb{R}^3\). Let us call it \(S_1, S_2\).
+</div>
+<button class="toggle">Reveal Explanation</button>
+<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M5Q1.</p></div></div>
+</div>
+
+<div class="card" id="M5Q2">
+<div class="question-id">M5Q2</div>
+<div class="question">
+Let \(S_3\) be all those vectors perpendicular to \(S_1\). \(S_4\) be that of \(S_2\).
+</div>
+<button class="toggle">Reveal Explanation</button>
+<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M5Q2.</p></div></div>
+</div>
+
+<div class="card" id="M5Q3">
+<div class="question-id">M5Q3</div>
+<div class="question">
+Find a matrix \(M\) whose Null-Space is \(S_3\), column space is \(S_2\).
+</div>
+<button class="toggle">Reveal Explanation</button>
+<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M5Q3.</p></div></div>
+</div>
+
+<div class="card" id="M5Q4">
+<div class="question-id">M5Q4</div>
+<div class="question">
+What does \(S_1\) and \(S_4\) represent?
+</div>
+<button class="toggle">Reveal Explanation</button>
+<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M5Q4.</p></div></div>
+</div>
+
+<div class="card" id="M5Q5">
+<div class="question-id">M5Q5</div>
+<div class="question">
+Do you observe there is a bijection from \(S_1 \to S_2\)?
+</div>
+<button class="toggle">Reveal Explanation</button>
+<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M5Q5.</p></div></div>
+</div>
+<div class="module-heading" id="M6">Module 6</div>
+<div class="card" id="M6Q1">
+<div class="question-id">M6Q1</div>
+<div class="question">
+<b>Recommender System</b>
+<br><br>
+How do streaming platforms such as Netflix, Amazon Prime, Spotify, etc. guess which movie or song you might like next? At the heart of it lies a recommendation engine built using <b>Matrix Factorization</b> &mdash; a beautiful application of linear algebra on user&ndash;item rating matrices.
+<br><br>
+Think about it:
+<ul>
+<li>What does a user &times; movie rating matrix look like?</li>
+<li>How can we fill in the missing entries using matrix factorization?</li>
+<li>What role do Singular Value Decomposition (SVD) and low-rank approximation play here?</li>
+</ul>
+</div>
+<button class="toggle">Reveal Explanation</button>
+<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M6Q1.</p></div></div>
+</div>
+
+<div class="card" id="M6Q2">
+<div class="question-id">M6Q2</div>
+<div class="question">
+<b>Page Ranking</b>
+<br><br>
+When you search on Google, how does it decide which web page appears first? The famous <b>PageRank algorithm</b> (founders Larry Page & Sergey Brin) uses the structure of the web as a huge <b>transition matrix</b> and computes the stationary distribution using the <b>Markov chains</b> you studied earlier in Module 2.
+<br><br>
+Think about it:
+<ul>
+<li>How is the web modelled as a directed graph with an associated transition matrix?</li>
+<li>Why is PageRank the dominant eigenvector of this matrix?</li>
+<li>How do we handle dangling nodes and the random surfer's teleport?</li>
+</ul>
+</div>
+<button class="toggle">Reveal Explanation</button>
+<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M6Q2.</p></div></div>
+</div>
+
+<div class="card" id="M6Q3">
+<div class="question-id">M6Q3</div>
+<div class="question">
+<b>Dimensionality Reduction</b>
+<br><br>
+Modern datasets (images, text, genes) live in extremely high-dimensional spaces. But the intrinsic information often lies on a much lower-dimensional manifold. Finding this lower-dimensional representation is the goal of <b>dimensionality reduction</b>, with <b>Principal Component Analysis (PCA)</b> being the workhorse.
+<br><br>
+Think about it:
+<ul>
+<li>What does PCA do? (Hint: it rotates the basis to align with directions of maximum variance.)</li>
+<li>How does it use the eigen-decomposition of the covariance matrix?</li>
+<li>Real-world applications: face recognition (Eigenfaces), image compression, gene-expression analysis.</li>
+</ul>
+</div>
+<button class="toggle">Reveal Explanation</button>
+<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M6Q3.</p></div></div>
+</div>
+
+</main></div>
+<canvas class="fireworks" aria-hidden="true"></canvas>
+<script>
+document.querySelectorAll(".toggle").forEach(btn=>{
+ const wrap=btn.nextElementSibling;
+ btn.onclick=()=>{
+  const open=wrap.classList.toggle("open");
+  document.body.classList.toggle("no-overscroll", !open);
+  if(open){
+    wrap.style.display="block";
+    wrap.style.height="0px";
+    wrap.style.maxHeight="0px";
+    wrap.style.opacity="0";
+    requestAnimationFrame(()=>{
+      const targetHeight = wrap.scrollHeight + "px";
+      wrap.style.height=targetHeight;
+      wrap.style.maxHeight=targetHeight;
+      wrap.style.opacity="1";
+    });
+    btn.textContent="Hide Explanation";
+  }else{
+    const currentHeight = wrap.scrollHeight + "px";
+    wrap.style.height=currentHeight;
+    wrap.style.maxHeight=currentHeight;
+    wrap.style.opacity="1";
+    requestAnimationFrame(()=>{
+      wrap.style.height="0px";
+      wrap.style.maxHeight="0px";
+      wrap.style.opacity="0";
+    });
+    btn.textContent="Reveal Explanation";
+  }
+ };
+ wrap.addEventListener("transitionend",e=>{
+   if((e.propertyName === "height" || e.propertyName === "max-height") && !wrap.classList.contains("open")){
+     wrap.style.height="0px";
+     wrap.style.maxHeight="0px";
+     wrap.style.opacity="0";
+   } else if((e.propertyName === "height" || e.propertyName === "max-height") && wrap.classList.contains("open")){
+     wrap.style.height="auto";
+     wrap.style.maxHeight="none";
+   }
+ });
+});
+</script>
+<script>
+(()=>{
+ const credit=document.querySelector(".madewith");
+ const canvas=document.querySelector(".fireworks");
+ const ctx=canvas.getContext("2d");
+ const colors=["#ff4d6d","#ffbe0b","#8ac926","#00b4d8","#4361ee","#c77dff","#ffffff"];
+ let rockets=[];
+ let particles=[];
+ let animationId=null;
+
+ const resize=()=>{
+  canvas.width=window.innerWidth;
+  canvas.height=window.innerHeight;
+ };
+ resize();
+ window.addEventListener("resize",resize);
+
+ const randomColor=()=>colors[Math.floor(Math.random()*colors.length)];
+
+ const explode=(x,y,color)=>{
+  const count=42+Math.floor(Math.random()*25);
+  for(let i=0;i<count;i++){
+   const angle=(Math.PI*2*i/count)+(Math.random()-.5)*.18;
+   const speed=2.2+Math.random()*4.8;
+   particles.push({
+    x,y,
+    vx:Math.cos(angle)*speed,
+    vy:Math.sin(angle)*speed,
+    color,
+    size:1.3+Math.random()*2.2,
+    life:1,
+    decay:.012+Math.random()*.012
+   });
+  }
+ };
+
+ const launch=(delay)=>{
+  const width=canvas.width;
+  const height=canvas.height;
+  rockets.push({
+   x:width*(.08+Math.random()*.84),
+   y:height+12,
+   targetY:height*(.08+Math.random()*.43),
+   vx:(Math.random()-.5)*1.7,
+   vy:-(11.5+Math.random()*4),
+   color:randomColor(),
+   delay
+  });
+ };
+
+ const animate=()=>{
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+
+  for(let i=rockets.length-1;i>=0;i--){
+   const r=rockets[i];
+   if(r.delay>0){r.delay--;continue;}
+
+   ctx.globalAlpha=.35;
+   ctx.fillStyle=r.color;
+   ctx.beginPath();
+   ctx.arc(r.x-r.vx*2,r.y-r.vy*.5,5,0,Math.PI*2);
+   ctx.fill();
+   ctx.globalAlpha=1;
+   ctx.beginPath();
+   ctx.arc(r.x,r.y,2.4,0,Math.PI*2);
+   ctx.fill();
+
+   r.x+=r.vx;
+   r.y+=r.vy;
+   r.vy+=.075;
+   if(r.y<=r.targetY){
+    explode(r.x,r.y,r.color);
+    rockets.splice(i,1);
+   }
+  }
+
+  for(let i=particles.length-1;i>=0;i--){
+   const p=particles[i];
+   ctx.globalAlpha=Math.max(0,p.life*.25);
+   ctx.fillStyle=p.color;
+   ctx.beginPath();
+   ctx.arc(p.x,p.y,p.size*2.3,0,Math.PI*2);
+   ctx.fill();
+   ctx.globalAlpha=Math.max(0,p.life);
+   ctx.beginPath();
+   ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
+   ctx.fill();
+
+   p.x+=p.vx;
+   p.y+=p.vy;
+   p.vx*=.986;
+   p.vy=p.vy*.986+.055;
+   p.life-=p.decay;
+   if(p.life<=0)particles.splice(i,1);
+  }
+  ctx.globalAlpha=1;
+
+  if(rockets.length||particles.length){
+   animationId=requestAnimationFrame(animate);
+  }else{
+   ctx.clearRect(0,0,canvas.width,canvas.height);
+   canvas.style.display="none";
+   animationId=null;
+  }
+ };
+
+ credit.addEventListener("click",()=>{
+  resize();
+  canvas.style.display="block";
+  const total=8+Math.floor(Math.random()*4);
+  for(let i=0;i<total;i++)launch(i*7+Math.floor(Math.random()*5));
+  if(!animationId)animate();
+ });
+})();
+</script>
+</body></html>
