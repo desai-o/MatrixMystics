@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Matrix Mystics Solutions</title>
 <style>
@@ -28,13 +28,16 @@ html,body{height:100%}
 .sidebar-links a{display:inline-block;text-align:center;padding:0;font-size:13px;color:#6b4f2a;text-decoration:none;font-weight:600;background:none;box-shadow:none}
 .sidebar-links a:hover{text-decoration:underline;opacity:.9}
 .main{flex:1;padding:40px}
-.card{background:#fbf7ef;border:1px solid #d8c8a8;border-radius:14px;padding:28px;margin-bottom:28px;box-shadow:0 4px 14px rgba(0,0,0,.06)}
+.card{background:#fbf7ef;border:1px solid #d8c8a8;border-radius:14px;padding:28px;margin-bottom:28px;box-shadow:0 4px 14px rgba(0,0,0,.06);content-visibility:auto;contain-intrinsic-size:auto 320px}
 .question-id{font-size:24px;font-weight:700;color:#6b4f2a;margin-bottom:16px}
 .question{font-size:15.5px;line-height:1.8}
 .module-heading{font-size:30px;font-weight:700;color:#6b4f2a;margin:6px 0 22px;padding:6px 0 10px;border-bottom:2px solid #d8c8a8;letter-spacing:1px;text-align:center}
-.toggle{margin-top:22px;background:#fbf7ef;border:1px solid #d8c8a8;color:#6b4f2a;font-weight:600;cursor:pointer;font-size:15px;padding:6px 16px;border-radius:8px;transition:background .2s ease,border-color .2s ease}
-.toggle:hover{background:#f2eadb;border-color:#9d7a4b}
-.answer-wrap{display:block;height:0;overflow:hidden;opacity:0;max-height:0;transition:height .95s cubic-bezier(.22,1,.36,1),opacity .75s ease,max-height .95s cubic-bezier(.22,1,.36,1);margin-top:14px;margin-bottom:18px;padding:0}
+.toggle{display:block;margin:22px auto 0;background:none;border:none;color:#6b4f2a;cursor:pointer;font-size:26px;line-height:1;padding:4px 12px;transition:transform .3s ease,color .2s ease}
+.toggle:hover{color:#9d7a4b;transform:scale(1.2)}
+.toggle.open{transform:rotate(180deg)}
+.toggle.open:hover{transform:rotate(180deg) scale(1.2)}
+.answer-wrap{display:block;margin-top:14px;margin-bottom:18px;padding:0}
+.answer-wrap[hidden]{display:none}
 .answer{padding:18px 20px;line-height:1.8;background:transparent;color:#3f3526;border:1px solid rgba(109,79,42,0.12);border-radius:12px}
 .math{background:#f2eadb;border-left:4px solid #9d7a4b;padding:10px 14px;border-radius:6px;margin:14px 0}
 .madewith{cursor:pointer;transition:color .25s ease,letter-spacing .25s ease,transform .25s ease}
@@ -130,7 +133,7 @@ Ram and Lakshman were two brothers, Ram’s pocket money was twice as much as La
 and second week’s was (R2,L2) and so on. They try plotting their weekly savings on a graph sheet. How will the points look like?
 <br><br><b>Use GeoGebra and try to visualize how the plotted points would look over a timeline of several weeks?</b>
 </div>
-<button class="toggle">Reveal Explanation</button>
+<button class="toggle">&#x2335;</button>
 <div class="answer-wrap"><div class="answer">
 <h4>Understand how to convert above given data into points on a graph?</h4>
 <h5>We are basically learning the concept of converting simple real-world information into algebraic relationships (equations), which can then be represented and analyzed as points on the coordinate plane!</h5>
@@ -221,40 +224,101 @@ This is the equation of a straight line through the origin, so every plotted poi
 <div class="question">
 Atul's house is centered at origin \((0,0)\) he walks straight (along the x-axis) for 2 units and then takes a left and walks 1 unit to reach Bala's house, after that he takes a right turn and walks for one unit and then a left turn and walks for one unit and reaches Chetan's house. He continues in a similar style, takes a right turn 1 unit and then left turn one unit and reaches Divya's house. Are the houses of Bala, Chetan and Divya on a straight line? What is the equation of this line? Plot this on Geogebra.
 </div>
-<button class="toggle">Reveal Explanation</button>
-<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M1Q2.</p></div></div>
+<button class="toggle">&#x2335;</button>
+<div class="answer-wrap"><div class="answer">
+<h3>Tracing the path</h3>
+<p>Take East as the positive \(x\)-direction and North as the positive \(y\)-direction. Starting at \((0,0)\), the three houses are reached at Bala \((2,1)\), Chetan \((3,2)\), and Divya \((4,3)\).</p>
+<table class="solution-table">
+<thead><tr><th>Step</th><th>From</th><th>To</th></tr></thead>
+<tbody>
+<tr><td>Walk 2 units East</td><td>\((0,0)\)</td><td>\((2,0)\)</td></tr>
+<tr><td>Turn left; Bala's house</td><td>\((2,0)\)</td><td>\((2,1)\)</td></tr>
+<tr><td>Turn right</td><td>\((2,1)\)</td><td>\((3,1)\)</td></tr>
+<tr><td>Turn left; Chetan's house</td><td>\((3,1)\)</td><td>\((3,2)\)</td></tr>
+<tr><td>Turn right</td><td>\((3,2)\)</td><td>\((4,2)\)</td></tr>
+<tr><td>Turn left; Divya's house</td><td>\((4,2)\)</td><td>\((4,3)\)</td></tr>
+</tbody>
+</table>
+<h3>Are the houses collinear?</h3>
+<div class="math">\[
+\operatorname{Slope}_{(2,1)\to(3,2)}=\frac{2-1}{3-2}=1,
+\qquad
+\operatorname{Slope}_{(3,2)\to(4,3)}=\frac{3-2}{4-3}=1.
+\]</div>
+<p>The slopes are equal, so the three houses lie on one straight line. Using any of the points gives</p>
+<div class="math">\[\boxed{y=x-1 \quad\text{or}\quad x-y-1=0}.\]</div>
+<p><b>GeoGebra:</b> Plot <code>(2,1)</code>, <code>(3,2)</code>, and <code>(4,3)</code>, and enter <code>y = x - 1</code>.</p>
+</div></div>
 </div>
 <div class="card" id="M1Q3">
 <div class="question-id">M1Q3</div>
 <div class="question">
 Plot the lines \(y = x\), \(y = 2x\), \(y = 10x\).
 </div>
-<button class="toggle">Reveal Explanation</button>
-<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M1Q3.</p></div></div>
+<button class="toggle">&#x2335;</button>
+<div class="answer-wrap"><div class="answer">
+<h3>Plot and compare the lines</h3>
+<table class="solution-table">
+<thead><tr><th>Line</th><th>Slope</th><th>Sample points</th></tr></thead>
+<tbody>
+<tr><td>\(y=x\)</td><td>\(1\)</td><td>\((0,0),(1,1),(2,2)\)</td></tr>
+<tr><td>\(y=2x\)</td><td>\(2\)</td><td>\((0,0),(1,2),(2,4)\)</td></tr>
+<tr><td>\(y=10x\)</td><td>\(10\)</td><td>\((0,0),(1,10),(2,20)\)</td></tr>
+</tbody>
+</table>
+<p>All three are straight lines through the origin. Their slopes are \(1\), \(2\), and \(10\); therefore, \(y=10x\) is the steepest and \(y=x\) is the least steep.</p>
+<p><b>GeoGebra:</b> Enter <code>y = x</code>, <code>y = 2x</code>, and <code>y = 10x</code> in the input bar.</p>
+</div></div>
 </div>
 <div class="card" id="M1Q4">
 <div class="question-id">M1Q4</div>
 <div class="question">
 Observe that they all pass through the origin. Why?
 </div>
-<button class="toggle">Reveal Explanation</button>
-<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M1Q4.</p></div></div>
+<button class="toggle">&#x2335;</button>
+<div class="answer-wrap"><div class="answer">
+<p>Each equation has the form \(y=mx\), with no constant term. Substituting \(x=0\) gives</p>
+<div class="math">\[y=m(0)=0.\]</div>
+<p>Thus \((0,0)\) satisfies every equation of this form. In particular, it is a common point of \(y=x\), \(y=2x\), and \(y=10x\), so all three lines pass through the origin.</p>
+</div></div>
 </div>
 <div class="card" id="M1Q5">
 <div class="question-id">M1Q5</div>
 <div class="question">
 Plot \(y = 2x + 1\). Observe, why doesn't it pass through the origin?
 </div>
-<button class="toggle">Reveal Explanation</button>
-<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M1Q5.</p></div></div>
+<button class="toggle">&#x2335;</button>
+<div class="answer-wrap"><div class="answer">
+<p>Substitute \(x=0\) into the equation:</p>
+<div class="math">\[x=0 \implies y=2(0)+1=1\ne0.\]</div>
+<p>Therefore, the line passes through \((0,1)\), not \((0,0)\). Its \(y\)-intercept is \(1\), and the constant term shifts the line one unit upward, parallel to \(y=2x\).</p>
+<h3>Key insight</h3>
+<p>A line \(y=ax+b\) passes through the origin exactly when \(b=0\).</p>
+</div></div>
 </div>
 <div class="card" id="M1Q6">
 <div class="question-id">M1Q6</div>
 <div class="question">
 Plot \(y = ax + b\), with \(a\) and \(b\) as parameters which you should be able to vary. What do you observe?
 </div>
-<button class="toggle">Reveal Explanation</button>
-<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M1Q6.</p></div></div>
+<button class="toggle">&#x2335;</button>
+<div class="answer-wrap"><div class="answer">
+<p>The two parameters affect the graph in different ways:</p>
+<table class="solution-table">
+<thead><tr><th>Parameter</th><th>Effect on the line</th></tr></thead>
+<tbody>
+<tr><td>\(a\) (slope)</td><td>Changes the tilt. If \(a>0\), the line rises; if \(a<0\), it falls; and if \(a=0\), it is horizontal.</td></tr>
+<tr><td>\(b\) (intercept)</td><td>Moves the line vertically. Its \(y\)-intercept is \((0,b)\), and it passes through the origin exactly when \(b=0\).</td></tr>
+</tbody>
+</table>
+<h3>Special cases</h3>
+<ul>
+<li>\(a=0,\ b\ne0\): the horizontal line \(y=b\).</li>
+<li>\(b=0\): a line through the origin.</li>
+<li>\(a\ne0,\ b=0\): a line through the origin with slope \(a\).</li>
+</ul>
+<p><b>GeoGebra:</b> Enter <code>y = a x + b</code> and create sliders for \(a\) and \(b\).</p>
+</div></div>
 </div>
 <div class="card" id="M1Q7">
 <div class="question-id">M1Q7</div>
@@ -266,64 +330,161 @@ Do you see a \(2 \times 2\) matrix here? What is the importance of seeing a matr
 <br><br>Do you observe that this problem can be retold as:
 <div class="math">\[\begin{pmatrix} 2 & 3 \\ 3 & 4 \end{pmatrix} \begin{pmatrix} x \\ y \end{pmatrix} = \begin{pmatrix} 7 \\ 10 \end{pmatrix}\]</div>
 </div>
-<button class="toggle">Reveal Explanation</button>
-<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M1Q7.</p></div></div>
+<button class="toggle">&#x2335;</button>
+<div class="answer-wrap"><div class="answer">
+<h3>Matrix form</h3>
+<div class="math">\[
+\underbrace{\begin{pmatrix}2&3\\3&4\end{pmatrix}}_{A}
+\underbrace{\begin{pmatrix}x\\y\end{pmatrix}}_{\vec{x}}
+=
+\underbrace{\begin{pmatrix}7\\10\end{pmatrix}}_{\vec{b}}.
+\]</div>
+<h3>Solving by elimination</h3>
+<p>Multiply the first equation by \(3\) and the second by \(2\):</p>
+<div class="math">\[
+\begin{aligned}
+6x+9y&=21,\\
+6x+8y&=20.
+\end{aligned}
+\]</div>
+<p>Subtracting gives \(y=1\). Substitution into \(2x+3y=7\) then gives \(x=2\). Hence</p>
+<div class="math">\[\boxed{x=2,\quad y=1}.\]</div>
+<h3>Why matrices matter</h3>
+<p>Matrices encode systems of equations compactly and let the same methods scale to very large systems. They also represent linear transformations used in computer graphics, machine learning, physics, and many other fields.</p>
+</div></div>
 </div>
 <div class="card" id="M1Q8">
 <div class="question-id">M1Q8</div>
 <div class="question">
 Consider a simple function \(f(x) = 3x + 2\). This function is invertible right? Can you tell us what is \(\alpha\) such that \(f(\alpha) = 17\)? Is such an \(\alpha\) unique? How did you find such an \(\alpha\)? Is this always possible?
 </div>
-<button class="toggle">Reveal Explanation</button>
-<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M1Q8.</p></div></div>
+<button class="toggle">&#x2335;</button>
+<div class="answer-wrap"><div class="answer">
+<p>Set \(f(\alpha)=17\) and solve:</p>
+<div class="math">\[
+3\alpha+2=17
+\implies 3\alpha=15
+\implies \boxed{\alpha=5}.
+\]</div>
+<p><b>Yes, the solution is unique.</b> The function has nonzero slope, so it is one-to-one; it is also onto \(\mathbb{R}\). For any real output \(c\),</p>
+<div class="math">\[f(\alpha)=c \implies \alpha=\frac{c-2}{3}.\]</div>
+<p>Equivalently, its inverse is \(f^{-1}(c)=\frac{c-2}{3}\), so every real output has exactly one real input.</p>
+</div></div>
 </div>
 <div class="card" id="M1Q9">
 <div class="question-id">M1Q9</div>
 <div class="question">
 Consider the function \(f(x) = x^2 - 10\), what is \(f(5)\)?
 </div>
-<button class="toggle">Reveal Explanation</button>
-<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M1Q9.</p></div></div>
+<button class="toggle">&#x2335;</button>
+<div class="answer-wrap"><div class="answer">
+<p>Substitute \(x=5\):</p>
+<div class="math">\[f(5)=5^2-10=25-10=\boxed{15}.\]</div>
+</div></div>
 </div>
 <div class="card" id="M1Q10">
 <div class="question-id">M1Q10</div>
 <div class="question">
 Consider the function \(f(x) = x^2 - 10\), if \(f(\alpha) = 54\), what is \(\alpha\)?
 </div>
-<button class="toggle">Reveal Explanation</button>
-<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M1Q10.</p></div></div>
+<button class="toggle">&#x2335;</button>
+<div class="answer-wrap"><div class="answer">
+<p>Set the function equal to \(54\):</p>
+<div class="math">\[
+\alpha^2-10=54
+\implies \alpha^2=64
+\implies \boxed{\alpha=\pm8}.
+\]</div>
+<p>The solution is <b>not unique</b>: both \(8\) and \(-8\) give the output \(54\). This happens because the parabola is not one-to-one:</p>
+<div class="math">\[f(8)=f(-8)=54.\]</div>
+<p>The function becomes invertible if its domain is restricted, for example, to \(x\ge0\) (with the corresponding range \([-10,\infty)\)).</p>
+</div></div>
 </div>
 <div class="card" id="M1Q11">
 <div class="question-id">M1Q11</div>
 <div class="question">
 Consider the function \(g(x) = x^3 - x^2 - 10x + 2\), if \(g(x) = -22\) what is \(x\)?
 </div>
-<button class="toggle">Reveal Explanation</button>
-<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M1Q11.</p></div></div>
+<button class="toggle">&#x2335;</button>
+<div class="answer-wrap"><div class="answer">
+<p>Set \(g(x)=-22\):</p>
+<div class="math">\[
+x^3-x^2-10x+2=-22
+\implies x^3-x^2-10x+24=0.
+\]</div>
+<p>The Rational Root Theorem gives the candidates \(\pm1,\pm2,\pm3,\pm4,\pm6,\pm8,\pm12,\pm24\), but none is a root. Let \(h(x)=x^3-x^2-10x+24\). A numerical search gives:</p>
+<table class="solution-table">
+<thead><tr><th>\(x\)</th><th>\(h(x)\)</th></tr></thead>
+<tbody>
+<tr><td>\(-4\)</td><td>\(-16\)</td></tr>
+<tr><td>\(-3.7\)</td><td>\(-3.34\)</td></tr>
+<tr><td>\(-3.6\)</td><td>\(0.38\)</td></tr>
+<tr><td>\(-3.61\)</td><td>approximately \(0.02\)</td></tr>
+</tbody>
+</table>
+<p>Therefore, the real solution is</p>
+<div class="math">\[\boxed{x\approx-3.61}.\]</div>
+<p>This cubic has one real root; its other two roots form a complex-conjugate pair.</p>
+</div></div>
 </div>
 <div class="card" id="M1Q12">
 <div class="question-id">M1Q12</div>
 <div class="question">
 Do you know what is \(\mathbb{R}\), \(\mathbb{R}^2\) and \(\mathbb{R}^3\)?
 </div>
-<button class="toggle">Reveal Explanation</button>
-<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M1Q12.</p></div></div>
+<button class="toggle">&#x2335;</button>
+<div class="answer-wrap"><div class="answer">
+<table class="solution-table">
+<thead><tr><th>Space</th><th>Description</th><th>Example</th></tr></thead>
+<tbody>
+<tr><td>\(\mathbb{R}\)</td><td>The set of all real numbers.</td><td>\(3.14,-7,\sqrt2\)</td></tr>
+<tr><td>\(\mathbb{R}^2=\mathbb{R}\times\mathbb{R}\)</td><td>Ordered pairs of real numbers; the two-dimensional plane.</td><td>\((2,-1)\)</td></tr>
+<tr><td>\(\mathbb{R}^3=\mathbb{R}\times\mathbb{R}\times\mathbb{R}\)</td><td>Ordered triples of real numbers; three-dimensional space.</td><td>\((1,2,3)\)</td></tr>
+</tbody>
+</table>
+<p>These Cartesian-product spaces are the natural settings for vectors, geometry, and linear algebra. More generally, \(\mathbb{R}^n\) consists of ordered \(n\)-tuples of real numbers.</p>
+</div></div>
 </div>
 <div class="card" id="M1Q13">
 <div class="question-id">M1Q13</div>
 <div class="question">
 Consider the function \(\phi : \mathbb{R}^2 \to \mathbb{R}^2\) defined by \(\phi(x, y) = (2x + 3y, 3x + 4y)\). What has this to do with the previous question?
 </div>
-<button class="toggle">Reveal Explanation</button>
-<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M1Q13.</p></div></div>
+<button class="toggle">&#x2335;</button>
+<div class="answer-wrap"><div class="answer">
+<p>The function is precisely multiplication by the coefficient matrix from the simultaneous equations:</p>
+<div class="math">\[
+\underbrace{\begin{pmatrix}2&3\\3&4\end{pmatrix}}_{A}
+\begin{pmatrix}x\\y\end{pmatrix}
+=
+\begin{pmatrix}2x+3y\\3x+4y\end{pmatrix}.
+\]</div>
+<p>Thus \(\phi(\vec{x})=A\vec{x}\). In particular, solving the earlier system is the same as finding an input vector for which</p>
+<div class="math">\[\phi(x,y)=(7,10).\]</div>
+<p>The input \((2,1)\) works because \(\phi(2,1)=(7,10)\). This shows how a matrix encodes a linear function from \(\mathbb{R}^2\) to \(\mathbb{R}^2\).</p>
+</div></div>
 </div>
 <div class="card" id="M1Q14">
 <div class="question-id">M1Q14</div>
 <div class="question">
 Is the function \(\phi\) invertible? In the question above on matrices, we see that it is of the form \(A\vec{x} = b\). Note that we can invert the matrix, using the method that was taught to us in our high school to find out the value for the variables \(x\) and \(y\). This is one of the many applications of matrices.
 </div>
-<button class="toggle">Reveal Explanation</button>
-<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M1Q14.</p></div></div>
+<button class="toggle">&#x2335;</button>
+<div class="answer-wrap"><div class="answer">
+<p>For \(A=\begin{pmatrix}2&3\\3&4\end{pmatrix}\),</p>
+<div class="math">\[\det(A)=2(4)-3(3)=8-9=-1\ne0.\]</div>
+<p>Therefore, <b>\(\phi\) is invertible</b>. Its inverse matrix is</p>
+<div class="math">\[
+\begin{aligned}
+A^{-1}
+&=\frac{1}{\det(A)}\begin{pmatrix}4&-3\\-3&2\end{pmatrix}\\
+&=\begin{pmatrix}-4&3\\3&-2\end{pmatrix}.
+\end{aligned}
+\]</div>
+<p>Hence the inverse function is</p>
+<div class="math">\[\boxed{\phi^{-1}(u,v)=(-4u+3v,\ 3u-2v)}.\]</div>
+<p>For example, \(\phi(2,1)=(7,10)\), and \(\phi^{-1}(7,10)=(2,1)\). Matrix inversion explicitly undoes the linear transformation and solves \(A\vec{x}=\vec{b}\).</p>
+</div></div>
 </div>
 <div class="card" id="M1Q15">
 <div class="question-id">M1Q15</div>
@@ -331,16 +492,48 @@ Is the function \(\phi\) invertible? In the question above on matrices, we see t
 We will now see matrices as functions. Instead of \(\phi\) we will write the matrix itself:
 <div class="math">\[\begin{pmatrix} 2 & 3 \\ 3 & 4 \end{pmatrix} : \mathbb{R}^2 \to \mathbb{R}^2\]</div>
 </div>
-<button class="toggle">Reveal Explanation</button>
-<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M1Q15.</p></div></div>
+<button class="toggle">&#x2335;</button>
+<div class="answer-wrap"><div class="answer">
+<p>Let \(A=\begin{pmatrix}2&3\\3&4\end{pmatrix}\). Viewing \(A\) as a function means that it takes a vector in \(\mathbb{R}^2\) and returns another vector in \(\mathbb{R}^2\):</p>
+<div class="math">\[
+A\begin{pmatrix}x\\y\end{pmatrix}
+=
+\begin{pmatrix}2&3\\3&4\end{pmatrix}
+\begin{pmatrix}x\\y\end{pmatrix}
+=
+\begin{pmatrix}2x+3y\\3x+4y\end{pmatrix}.
+\]</div>
+<p>Therefore, the matrix represents exactly the same function as \(\phi(x,y)=(2x+3y,3x+4y)\). For example,</p>
+<div class="math">\[A\begin{pmatrix}2\\1\end{pmatrix}=\begin{pmatrix}7\\10\end{pmatrix}.\]</div>
+<p>It is a linear function because \(A(\vec{u}+\vec{v})=A\vec{u}+A\vec{v}\) and \(A(c\vec{u})=cA\vec{u}\). Also, \(\det(A)=-1\ne0\), so this matrix function is invertible.</p>
+</div></div>
 </div>
 <div class="card" id="M1Q16">
 <div class="question-id">M1Q16</div>
 <div class="question">
 Consider the function \(\begin{pmatrix} 1 & 2 \\ 2 & 4 \end{pmatrix} : \mathbb{R}^2 \to \mathbb{R}^2\). This matrix takes a few elements to the origin. What are those elements? Plot this using Geogebra.
 </div>
-<button class="toggle">Reveal Explanation</button>
-<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M1Q16.</p></div></div>
+<button class="toggle">&#x2335;</button>
+<div class="answer-wrap"><div class="answer">
+<p>Let \(B=\begin{pmatrix}1&2\\2&4\end{pmatrix}\). We need all vectors sent to \((0,0)\), so solve</p>
+<div class="math">\[
+B\begin{pmatrix}x\\y\end{pmatrix}
+=
+\begin{pmatrix}x+2y\\2x+4y\end{pmatrix}
+=
+\begin{pmatrix}0\\0\end{pmatrix}.
+\]</div>
+<p>The second equation is twice the first, leaving the single condition \(x+2y=0\), or \(y=-x/2\). Thus</p>
+<div class="math">\[
+\boxed{\ker(B)=\{(x,y)\in\mathbb{R}^2:x+2y=0\}
+=\{t(2,-1):t\in\mathbb{R}\}}.
+\]</div>
+<p>Examples are \((0,0)\), \((2,-1)\), \((-2,1)\), and \((4,-2)\). Every point on that line is mapped to the origin.</p>
+<h3>GeoGebra plot</h3>
+<p>Enter <code>y = -x/2</code>. GeoGebra displays the entire kernel as a line through the origin.</p>
+<div class="math">\[\det(B)=1(4)-2(2)=0,\]</div>
+<p>confirming that \(B\) is singular and has a nontrivial kernel.</p>
+</div></div>
 </div>
 <div class="module-heading" id="M2">Module 2</div>
 <div class="card" id="M2Q1">
@@ -356,7 +549,7 @@ So \(SUDARSHANA\) will end up becoming: \(96, 134, 6, 9, 88, 123, 14, 21, 26, 39
 <br><br>
 Given these numbers, how will you decrypt the message and get back \(SUDARSHANA\)? This is a well known cryptographic protocol called the <b>Hill Cipher</b>. You can read more online.
 </div>
-<button class="toggle">Reveal Explanation</button>
+<button class="toggle">&#x2335;</button>
 <div class="answer-wrap"><div class="answer"><p>Placeholder solution for M2Q1.</p></div></div>
 </div>
 <div class="card" id="M2Q2">
@@ -367,7 +560,7 @@ We encounter equations very often in our lives. Consider for example, the follow
 <div class="math">\[3A + 1C = 1200\]</div>
 <div class="math">\[1A + 2C = 1000\]</div>
 </div>
-<button class="toggle">Reveal Explanation</button>
+<button class="toggle">&#x2335;</button>
 <div class="answer-wrap"><div class="answer"><p>Placeholder solution for M2Q2.</p></div></div>
 </div>
 <div class="card" id="M2Q3">
@@ -379,7 +572,7 @@ While we were taught the so called two variables and two unknowns, what if there
 <div class="math">\[1A + 2C = 1000\]</div>
 <div class="math">\[1A + 1C = 900\]</div>
 </div>
-<button class="toggle">Reveal Explanation</button>
+<button class="toggle">&#x2335;</button>
 <div class="answer-wrap"><div class="answer"><p>Placeholder solution for M2Q3.</p></div></div>
 </div>
 <div class="card" id="M2Q4">
@@ -394,7 +587,7 @@ Note that the previous question can be modelled as a matrix:
 <u>Observe</u> this is same as:
 <div class="math">\[\begin{pmatrix} 3 & 1 \\ 1 & 2 \\ 1 & 1 \end{pmatrix} \begin{pmatrix} A \\ C \end{pmatrix} = \begin{pmatrix} 1200 \\ 1000 \\ 900 \end{pmatrix}\]</div>
 </div>
-<button class="toggle">Reveal Explanation</button>
+<button class="toggle">&#x2335;</button>
 <div class="answer-wrap"><div class="answer"><p>Placeholder solution for M2Q4.</p></div></div>
 </div>
 <div class="card" id="M2Q5">
@@ -402,7 +595,7 @@ Note that the previous question can be modelled as a matrix:
 <div class="question">
 One obvious way to solve this, is to guess the values <span style="font-size:18px">&#x1F609;</span>. Can you get closer to the solution by guessing? Note that there is no solution to this question. You can just reduce the error. Do you see why?
 </div>
-<button class="toggle">Reveal Explanation</button>
+<button class="toggle">&#x2335;</button>
 <div class="answer-wrap"><div class="answer"><p>Placeholder solution for M2Q5.</p></div></div>
 </div>
 <div class="card" id="M2Q6">
@@ -410,11 +603,11 @@ One obvious way to solve this, is to guess the values <span style="font-size:18p
 <div class="question">
 In the figure below:
 <br><br>
-<img src="https://sudarshansudarshan.github.io/codershigh/assets/markov2.png" alt="markov2 figure" style="max-width:75%;border-radius:10px;display:block;margin:14px auto;height:auto">
+<img src="https://sudarshansudarshan.github.io/codershigh/assets/markov2.png" alt="markov2 figure" loading="lazy" decoding="async" style="max-width:75%;border-radius:10px;display:block;margin:14px auto;height:auto">
 <br><br>
 If 1000 people were to start in one state, what will be the distribution of people eventually?
 </div>
-<button class="toggle">Reveal Explanation</button>
+<button class="toggle">&#x2335;</button>
 <div class="answer-wrap"><div class="answer"><p>Placeholder solution for M2Q6.</p></div></div>
 </div>
 <div class="card" id="M2Q7">
@@ -422,11 +615,11 @@ If 1000 people were to start in one state, what will be the distribution of peop
 <div class="question">
 In the figure below:
 <br><br>
-<img src="https://sudarshansudarshan.github.io/codershigh/assets/markov3.png" alt="markov3 figure" style="max-width:56%;border-radius:10px;display:block;margin:14px auto;height:auto">
+<img src="https://sudarshansudarshan.github.io/codershigh/assets/markov3.png" alt="markov3 figure" loading="lazy" decoding="async" style="max-width:56%;border-radius:10px;display:block;margin:14px auto;height:auto">
 <br><br>
 If 1000 people were to start in one state, what will be the distribution of people eventually?
 </div>
-<button class="toggle">Reveal Explanation</button>
+<button class="toggle">&#x2335;</button>
 <div class="answer-wrap"><div class="answer"><p>Placeholder solution for M2Q7.</p></div></div>
 </div>
 <div class="module-heading" id="M3">Module 3</div>
@@ -436,7 +629,7 @@ If 1000 people were to start in one state, what will be the distribution of peop
 <b>Use Geogebra:</b>
 <br>Draw the vector \(\begin{bmatrix} 1 \\ 1 \end{bmatrix}\). Find out all those vectors which are perpendicular to this vector.
 </div>
-<button class="toggle">Reveal Explanation</button>
+<button class="toggle">&#x2335;</button>
 <div class="answer-wrap"><div class="answer"><p>Placeholder solution for M3Q1.</p></div></div>
 </div>
 
@@ -446,7 +639,7 @@ If 1000 people were to start in one state, what will be the distribution of peop
 Do you observe that we are asking for vectors \(\begin{bmatrix} x \\ y \end{bmatrix}\) such that,
 <div class="math">\[\begin{bmatrix} 1 & 1 \end{bmatrix} \begin{bmatrix} x \\ y \end{bmatrix} = 0\]</div>
 </div>
-<button class="toggle">Reveal Explanation</button>
+<button class="toggle">&#x2335;</button>
 <div class="answer-wrap"><div class="answer"><p>Placeholder solution for M3Q2.</p></div></div>
 </div>
 
@@ -455,7 +648,7 @@ Do you observe that we are asking for vectors \(\begin{bmatrix} x \\ y \end{bmat
 <div class="question">
 Use Geogebra and solve the above question with \(\begin{bmatrix} 1 \\ 1 \end{bmatrix}\) replaced by \(\begin{bmatrix} a \\ b \end{bmatrix}\). Use \((a, b)\) as parameters and check what happens to \((x, y)\).
 </div>
-<button class="toggle">Reveal Explanation</button>
+<button class="toggle">&#x2335;</button>
 <div class="answer-wrap"><div class="answer"><p>Placeholder solution for M3Q3.</p></div></div>
 </div>
 
@@ -465,7 +658,7 @@ Use Geogebra and solve the above question with \(\begin{bmatrix} 1 \\ 1 \end{bma
 What is \((x, y, z)\) satisfying the following equation? (Use Geogebra)
 <div class="math">\[\begin{bmatrix} 1 & 2 & 3 \end{bmatrix} \begin{bmatrix} x \\ y \\ z \end{bmatrix} = 0\]</div>
 </div>
-<button class="toggle">Reveal Explanation</button>
+<button class="toggle">&#x2335;</button>
 <div class="answer-wrap"><div class="answer"><p>Placeholder solution for M3Q4.</p></div></div>
 </div>
 
@@ -475,7 +668,7 @@ What is \((x, y, z)\) satisfying the following equation? (Use Geogebra)
 Use Geogebra and plot all the points in the set below.
 <div class="math">\[T = \{ \alpha (1, 2, 1) \mid \alpha \in \mathbb{R} \}\]</div>
 </div>
-<button class="toggle">Reveal Explanation</button>
+<button class="toggle">&#x2335;</button>
 <div class="answer-wrap"><div class="answer"><p>Placeholder solution for M3Q5.</p></div></div>
 </div>
 
@@ -485,7 +678,7 @@ Use Geogebra and plot all the points in the set below.
 Use Geogebra and plot all the points in the set below.
 <div class="math">\[S = \{ \beta (2, 7, 3) \mid \beta \in \mathbb{R} \}\]</div>
 </div>
-<button class="toggle">Reveal Explanation</button>
+<button class="toggle">&#x2335;</button>
 <div class="answer-wrap"><div class="answer"><p>Placeholder solution for M3Q6.</p></div></div>
 </div>
 
@@ -495,7 +688,7 @@ Use Geogebra and plot all the points in the set below.
 Use Geogebra and plot all the points in the set below.
 <div class="math">\[W = \{ \alpha (1, 2, 1) + \beta (2, 7, 3) \mid \alpha, \beta \in \mathbb{R} \}\]</div>
 </div>
-<button class="toggle">Reveal Explanation</button>
+<button class="toggle">&#x2335;</button>
 <div class="answer-wrap"><div class="answer"><p>Placeholder solution for M3Q7.</p></div></div>
 </div>
 
@@ -506,7 +699,7 @@ In the set \(W\) of previous question, find out all the points \((x, y, z)\) sat
 <div class="math">\[\begin{bmatrix} w_1 & w_2 & w_3 \end{bmatrix} \begin{bmatrix} x \\ y \\ z \end{bmatrix} = 0\]</div>
 where \((w_1, w_2, w_3) \in W\). Note that \(w_i\)'s are real numbers.
 </div>
-<button class="toggle">Reveal Explanation</button>
+<button class="toggle">&#x2335;</button>
 <div class="answer-wrap"><div class="answer"><p>Placeholder solution for M3Q8.</p></div></div>
 </div>
 
@@ -517,7 +710,7 @@ Given the matrix \(A = \begin{bmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \\ 7 & 8 & 9 \end{
 <div class="math">\[\begin{bmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \\ 7 & 8 & 9 \end{bmatrix} \begin{bmatrix} x \\ y \\ z \end{bmatrix} = 0\]</div>
 Observe carefully, what has this question got to do with previous five questions in this module.
 </div>
-<button class="toggle">Reveal Explanation</button>
+<button class="toggle">&#x2335;</button>
 <div class="answer-wrap"><div class="answer"><p>Placeholder solution for M3Q9.</p></div></div>
 </div>
 
@@ -531,7 +724,7 @@ Given the matrix \(A = \begin{bmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \\ 7 & 8 & 9 \end{
 <li>\(N = \{ (x, y, z) \mid x (1,4,7) + y (2,5,8) + z (3,6,9) = 0 \}\)</li>
 </ul>
 </div>
-<button class="toggle">Reveal Explanation</button>
+<button class="toggle">&#x2335;</button>
 <div class="answer-wrap"><div class="answer"><p>Placeholder solution for M3Q10.</p></div></div>
 </div>
 
@@ -540,7 +733,7 @@ Given the matrix \(A = \begin{bmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \\ 7 & 8 & 9 \end{
 <div class="question">
 Did you observe that every vector of \(\mathscr{R}\) is perpendicular to every vector of \(N\)?
 </div>
-<button class="toggle">Reveal Explanation</button>
+<button class="toggle">&#x2335;</button>
 <div class="answer-wrap"><div class="answer"><p>Placeholder solution for M3Q11.</p></div></div>
 </div>
 
@@ -555,7 +748,7 @@ Consider the matrix \(B = \begin{bmatrix} 1 & 2 \\ 2 & 4 \end{bmatrix}\). Draw t
 <li>iii) \(2y + x = 1800\)</li>
 </ul>
 </div>
-<button class="toggle">Reveal Explanation</button>
+<button class="toggle">&#x2335;</button>
 <div class="answer-wrap"><div class="answer"><p>Placeholder solution for M3Q12.</p></div></div>
 </div>
 
@@ -564,7 +757,7 @@ Consider the matrix \(B = \begin{bmatrix} 1 & 2 \\ 2 & 4 \end{bmatrix}\). Draw t
 <div class="question">
 In general \(B = \begin{bmatrix} 1 & 2 \\ 2 & 4 \end{bmatrix} : \mathbb{R}^2 \to \mathbb{R}^2\), where does this function take \(2y + x = k\)? (where \(k\) is a constant)
 </div>
-<button class="toggle">Reveal Explanation</button>
+<button class="toggle">&#x2335;</button>
 <div class="answer-wrap"><div class="answer"><p>Placeholder solution for M3Q13.</p></div></div>
 </div>
 
@@ -573,7 +766,7 @@ In general \(B = \begin{bmatrix} 1 & 2 \\ 2 & 4 \end{bmatrix} : \mathbb{R}^2 \to
 <div class="question">
 Given \(B = \begin{bmatrix} 1 & 2 \\ 2 & 4 \end{bmatrix} : \mathbb{R}^2 \to \mathbb{R}^2\). What is the range of this function?
 </div>
-<button class="toggle">Reveal Explanation</button>
+<button class="toggle">&#x2335;</button>
 <div class="answer-wrap"><div class="answer"><p>Placeholder solution for M3Q14.</p></div></div>
 </div>
 
@@ -584,7 +777,7 @@ You have achieved the required wisdom if you have realized that:
 <div class="math">\[B = \begin{bmatrix} 1 & 2 \\ 2 & 4 \end{bmatrix} : \mathbb{R}^2 \to \mathbb{R}^2\]</div>
 "&nbsp;\(B\) collapses a dimension."
 </div>
-<button class="toggle">Reveal Explanation</button>
+<button class="toggle">&#x2335;</button>
 <div class="answer-wrap"><div class="answer"><p>Placeholder solution for M3Q15.</p></div></div>
 </div>
 
@@ -599,7 +792,7 @@ Given the matrix \(M = \begin{bmatrix} 1 & 3 \\ 2 & 6 \end{bmatrix}\). Use Geoge
 <li>\(\mathscr{N} = \{ (x,y) \mid x(1,2) + y(3,6) = 0, \forall x, y \in \mathbb{R} \}\)</li>
 </ul>
 </div>
-<button class="toggle">Reveal Explanation</button>
+<button class="toggle">&#x2335;</button>
 <div class="answer-wrap"><div class="answer"><p>Placeholder solution for M4Q1.</p></div></div>
 </div>
 
@@ -608,7 +801,7 @@ Given the matrix \(M = \begin{bmatrix} 1 & 3 \\ 2 & 6 \end{bmatrix}\). Use Geoge
 <div class="question">
 Note that \(\mathscr{R}\) and \(\mathscr{N}\) are orthogonal.
 </div>
-<button class="toggle">Reveal Explanation</button>
+<button class="toggle">&#x2335;</button>
 <div class="answer-wrap"><div class="answer"><p>Placeholder solution for M4Q2.</p></div></div>
 </div>
 
@@ -617,7 +810,7 @@ Note that \(\mathscr{R}\) and \(\mathscr{N}\) are orthogonal.
 <div class="question">
 What is the null-space of \(M = \begin{bmatrix} 1 & 3 \\ 2 & 6 \end{bmatrix}\) & the null-space of \(M^T\)?
 </div>
-<button class="toggle">Reveal Explanation</button>
+<button class="toggle">&#x2335;</button>
 <div class="answer-wrap"><div class="answer"><p>Placeholder solution for M4Q3.</p></div></div>
 </div>
 
@@ -626,7 +819,7 @@ What is the null-space of \(M = \begin{bmatrix} 1 & 3 \\ 2 & 6 \end{bmatrix}\) &
 <div class="question">
 Do you observe that \(C(M) \perp N(M^T)\), \(R(M) \perp N(M)\)? <span style="font-size:18px">&#x1F609;</span>
 </div>
-<button class="toggle">Reveal Explanation</button>
+<button class="toggle">&#x2335;</button>
 <div class="answer-wrap"><div class="answer"><p>Placeholder solution for M4Q4.</p></div></div>
 </div>
 
@@ -635,7 +828,7 @@ Do you observe that \(C(M) \perp N(M^T)\), \(R(M) \perp N(M)\)? <span style="fon
 <div class="question">
 Consider \(A = \begin{bmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \\ 7 & 8 & 9 \end{bmatrix}\). What is \(N(A)\), \(C(A)\), \(R(A)\), \(N(A^T)\).
 </div>
-<button class="toggle">Reveal Explanation</button>
+<button class="toggle">&#x2335;</button>
 <div class="answer-wrap"><div class="answer"><p>Placeholder solution for M4Q5.</p></div></div>
 </div>
 
@@ -652,7 +845,7 @@ Consider a \(4 \times 4\) matrix \(M : \mathbb{R}^4 \to \mathbb{R}^4\) whose ran
 </ul>
 Give an example each for all the above 5 cases.
 </div>
-<button class="toggle">Reveal Explanation</button>
+<button class="toggle">&#x2335;</button>
 <div class="answer-wrap"><div class="answer"><p>Placeholder solution for M4Q6.</p></div></div>
 </div>
 
@@ -669,7 +862,7 @@ b) Show that if the range contains the points \((a, b, c)\) and \((d, e, f)\), t
 <br>
 c) Note: \(S\) is of the dimension 1, but \(T\) needn't be of dimension 2. Think!
 </div>
-<button class="toggle">Reveal Explanation</button>
+<button class="toggle">&#x2335;</button>
 <div class="answer-wrap"><div class="answer"><p>Placeholder solution for M4Q7.</p></div></div>
 </div>
 
@@ -679,7 +872,7 @@ c) Note: \(S\) is of the dimension 1, but \(T\) needn't be of dimension 2. Think
 <div class="question">
 Give an example of two 2-dim subspaces in \(\mathbb{R}^3\). Let us call it \(S_1, S_2\).
 </div>
-<button class="toggle">Reveal Explanation</button>
+<button class="toggle">&#x2335;</button>
 <div class="answer-wrap"><div class="answer"><p>Placeholder solution for M5Q1.</p></div></div>
 </div>
 
@@ -688,7 +881,7 @@ Give an example of two 2-dim subspaces in \(\mathbb{R}^3\). Let us call it \(S_1
 <div class="question">
 Let \(S_3\) be all those vectors perpendicular to \(S_1\). \(S_4\) be that of \(S_2\).
 </div>
-<button class="toggle">Reveal Explanation</button>
+<button class="toggle">&#x2335;</button>
 <div class="answer-wrap"><div class="answer"><p>Placeholder solution for M5Q2.</p></div></div>
 </div>
 
@@ -697,7 +890,7 @@ Let \(S_3\) be all those vectors perpendicular to \(S_1\). \(S_4\) be that of \(
 <div class="question">
 Find a matrix \(M\) whose Null-Space is \(S_3\), column space is \(S_2\).
 </div>
-<button class="toggle">Reveal Explanation</button>
+<button class="toggle">&#x2335;</button>
 <div class="answer-wrap"><div class="answer"><p>Placeholder solution for M5Q3.</p></div></div>
 </div>
 
@@ -706,7 +899,7 @@ Find a matrix \(M\) whose Null-Space is \(S_3\), column space is \(S_2\).
 <div class="question">
 What does \(S_1\) and \(S_4\) represent?
 </div>
-<button class="toggle">Reveal Explanation</button>
+<button class="toggle">&#x2335;</button>
 <div class="answer-wrap"><div class="answer"><p>Placeholder solution for M5Q4.</p></div></div>
 </div>
 
@@ -715,7 +908,7 @@ What does \(S_1\) and \(S_4\) represent?
 <div class="question">
 Do you observe there is a bijection from \(S_1 \to S_2\)?
 </div>
-<button class="toggle">Reveal Explanation</button>
+<button class="toggle">&#x2335;</button>
 <div class="answer-wrap"><div class="answer"><p>Placeholder solution for M5Q5.</p></div></div>
 </div>
 <div class="module-heading" id="M6">Module 6</div>
@@ -733,7 +926,7 @@ Think about it:
 <li>What role do Singular Value Decomposition (SVD) and low-rank approximation play here?</li>
 </ul>
 </div>
-<button class="toggle">Reveal Explanation</button>
+<button class="toggle">&#x2335;</button>
 <div class="answer-wrap"><div class="answer"><p>Placeholder solution for M6Q1.</p></div></div>
 </div>
 
@@ -751,7 +944,7 @@ Think about it:
 <li>How do we handle dangling nodes and the random surfer's teleport?</li>
 </ul>
 </div>
-<button class="toggle">Reveal Explanation</button>
+<button class="toggle">&#x2335;</button>
 <div class="answer-wrap"><div class="answer"><p>Placeholder solution for M6Q2.</p></div></div>
 </div>
 
@@ -769,53 +962,35 @@ Think about it:
 <li>Real-world applications: face recognition (Eigenfaces), image compression, gene-expression analysis.</li>
 </ul>
 </div>
-<button class="toggle">Reveal Explanation</button>
+<button class="toggle">&#x2335;</button>
 <div class="answer-wrap"><div class="answer"><p>Placeholder solution for M6Q3.</p></div></div>
 </div>
 
 </main></div>
 <canvas class="fireworks" aria-hidden="true"></canvas>
 <script>
-document.querySelectorAll(".toggle").forEach(btn=>{
- const wrap=btn.nextElementSibling;
- btn.onclick=()=>{
-  const open=wrap.classList.toggle("open");
-  document.body.classList.toggle("no-overscroll", !open);
-  if(open){
-    wrap.style.display="block";
-    wrap.style.height="0px";
-    wrap.style.maxHeight="0px";
-    wrap.style.opacity="0";
-    requestAnimationFrame(()=>{
-      const targetHeight = wrap.scrollHeight + "px";
-      wrap.style.height=targetHeight;
-      wrap.style.maxHeight=targetHeight;
-      wrap.style.opacity="1";
-    });
-    btn.textContent="Hide Explanation";
-  }else{
-    const currentHeight = wrap.scrollHeight + "px";
-    wrap.style.height=currentHeight;
-    wrap.style.maxHeight=currentHeight;
-    wrap.style.opacity="1";
-    requestAnimationFrame(()=>{
-      wrap.style.height="0px";
-      wrap.style.maxHeight="0px";
-      wrap.style.opacity="0";
-    });
-    btn.textContent="Reveal Explanation";
-  }
- };
- wrap.addEventListener("transitionend",e=>{
-   if((e.propertyName === "height" || e.propertyName === "max-height") && !wrap.classList.contains("open")){
-     wrap.style.height="0px";
-     wrap.style.maxHeight="0px";
-     wrap.style.opacity="0";
-   } else if((e.propertyName === "height" || e.propertyName === "max-height") && wrap.classList.contains("open")){
-     wrap.style.height="auto";
-     wrap.style.maxHeight="none";
-   }
- });
+const toggles = document.querySelectorAll(".toggle");
+toggles.forEach((btn, index) => {
+ const wrap = btn.nextElementSibling;
+ const answerId = `answer-${index + 1}`;
+ wrap.id = answerId;
+ wrap.hidden = true;
+ btn.type = "button";
+ btn.setAttribute("aria-controls", answerId);
+ btn.setAttribute("aria-expanded", "false");
+ btn.setAttribute("aria-label", "Reveal answer");
+});
+
+document.querySelector(".main").addEventListener("click", event => {
+ const btn = event.target.closest(".toggle");
+ if (!btn) return;
+
+ const wrap = btn.nextElementSibling;
+ const open = wrap.hidden;
+ wrap.hidden = !open;
+ btn.classList.toggle("open", open);
+ btn.setAttribute("aria-expanded", String(open));
+ btn.setAttribute("aria-label", open ? "Hide answer" : "Reveal answer");
 });
 </script>
 <script>
