@@ -27,7 +27,7 @@ Made with ❤️ for the love of teaching & learning.
 
 **Matrix Mystics Solutions (`CodersHigh.html`)** is a self-contained, dependency-light web page that hosts the entire question bank of the *CodersHigh* module under the **Matrix Mystics** learning track.
 
-The page lays out **48 curated questions across 6 modules**, walking learners from the very basics of plotting points and lines, all the way to advanced applications like **PageRank**, **Recommender Systems**, and **Principal Component Analysis (PCA)**.
+The page lays out **53 curated questions across 6 modules**, walking learners from the very basics of plotting points and lines, all the way to advanced applications like **PageRank**, **Recommender Systems**, and **Principal Component Analysis (PCA)**.
 
 Every question is rendered as a card with a **"Reveal Explanation"** toggle. Explanations (where populated) use **KaTeX** for beautiful math rendering and **GeoGebra** links for hands-on visualization.
 
@@ -39,10 +39,10 @@ Every question is rendered as a card with a **"Reveal Explanation"** toggle. Exp
 
 | Feature | Description |
 |---|---|
-| 🗂 **Sidebar Navigation** | Sticky sidebar with collapsible `<details>` elements grouping questions by module. All modules are open by default for quick access. |
+| 🗂 **Sidebar Navigation** | Sticky sidebar with collapsible `<details>` elements grouping questions by module. All modules are open by default for quick access. *Note:* By design — for viewer friendliness — the **"Question 1"** entry of each module links to the module heading anchor (`#M1`, `#M2`, …) so you land on the module overview first; all other **"Question N"** links go directly to their question card (`#M1Q2`, `#M2Q3`, …). |
 | 🧮 **KaTeX Math Rendering** | Inline and display math (LaTeX) is rendered automatically on page load using `renderMathInElement`. |
 | 🎴 **Question Cards** | Each question lives in its own card with an ID like `M1Q1`, `M2Q3`, etc. (also used as anchor links for deep-linking). |
-| 👁 **Toggle Explanations** | Smooth, animated reveal/hide of explanations. Heights and opacity animate with a cubic-bezier easing for a polished feel. |
+| 👁 **Toggle Explanations** | Click the caret button on any card to instantly show or hide its worked solution. The toggle button itself has a smooth 180° rotation when opened (`transform` transition, 0.3s ease), while the answer panel snaps open/closed via the native `hidden` attribute for a snappy, lag-free feel. |
 | 🎆 **Fireworks Easter Egg** | Click the *"Made with ❤️ …"* footer to launch a colorful fireworks animation (Canvas-based). |
 | 📱 **Responsive Layout** | Flexbox layout with a sticky sidebar and scrollable main panel. Overscroll behavior is disabled for a cleaner feel. |
 | 🎨 **Warm Theme** | Beige / cream / warm-brown color palette (`#f5efe3`, `#6b4f2a`, `#9d7a4b`) for a paper-like reading experience. |
@@ -53,7 +53,7 @@ Every question is rendered as a card with a **"Reveal Explanation"** toggle. Exp
 
 ## 📚 Curriculum at a Glance
 
-The course is organized into **6 modules** with a total of **48 questions**:
+The course is organized into **6 modules** with a total of **53 questions**:
 
 ### Module 1 — *Foundations of Plots, Functions & Matrices* (16 questions)
 From real-world data → algebraic relationships → plotting on a coordinate plane. Introduces lines through the origin, slope, intercept, simultaneous equations as `Ax = b`, and the notion of a matrix as a function.
@@ -200,7 +200,7 @@ Because everything lives in one file, customization is straightforward:
 | Add a new module | Append a `<details>` to the sidebar and a new `<div class="module-heading" id="M7">Module 7</div>` in `<main>`. |
 | Replace the fireworks | Edit the second `<script>` block at the bottom of the file. |
 | Change fonts | Update the `font-family` in the `body` selector inside the inline `<style>`. |
-| Pin a question open | Remove the `height: 0; opacity: 0; max-height: 0;` defaults from `.answer-wrap` and set the `.toggle` button text to `Hide Explanation`. |
+| Pin a question open | Override the `hidden` attribute for that specific card (e.g. set `wrap.hidden = false` directly in the initialization script) and add the `open` class to its caret button so the rotation animation matches the visible state. |
 
 ---
 
