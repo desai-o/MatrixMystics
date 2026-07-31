@@ -28,10 +28,10 @@ html,body{height:100%}
 .sidebar-links a{display:inline-block;text-align:center;padding:0;font-size:13px;color:#6b4f2a;text-decoration:none;font-weight:600;background:none;box-shadow:none}
 .sidebar-links a:hover{text-decoration:underline;opacity:.9}
 .main{flex:1;padding:40px}
-.card{background:#fbf7ef;border:1px solid #d8c8a8;border-radius:14px;padding:28px;margin-bottom:28px;box-shadow:0 4px 14px rgba(0,0,0,.06);content-visibility:auto;contain-intrinsic-size:auto 320px}
+.card{background:#fbf7ef;border:1px solid #d8c8a8;border-radius:14px;padding:28px;margin-bottom:28px;box-shadow:0 4px 14px rgba(0,0,0,.06);scroll-margin-top:16px}
 .question-id{font-size:24px;font-weight:700;color:#6b4f2a;margin-bottom:16px}
 .question{font-size:15.5px;line-height:1.8}
-.module-heading{font-size:30px;font-weight:700;color:#6b4f2a;margin:6px 0 22px;padding:6px 0 10px;border-bottom:2px solid #d8c8a8;letter-spacing:1px;text-align:center}
+.module-heading{font-size:30px;font-weight:700;color:#6b4f2a;margin:6px 0 22px;padding:6px 0 10px;border-bottom:2px solid #d8c8a8;letter-spacing:1px;text-align:center;scroll-margin-top:16px}
 .toggle{display:block;margin:22px auto 0;background:none;border:none;color:#6b4f2a;cursor:pointer;font-size:26px;line-height:1;padding:4px 12px;transition:transform .3s ease,color .2s ease}
 .toggle:hover{color:#9d7a4b;transform:scale(1.2)}
 .toggle.open{transform:rotate(180deg)}
@@ -52,7 +52,7 @@ src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 
 <script defer
 src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
-onload="renderMathInElement(document.body);"></script>
+onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false},{left:'\\(',right:'\\)',display:false},{left:'\\[',right:'\\]',display:true}]});"></script>
 </head>
 <body>
 <div class="layout">
@@ -550,7 +550,28 @@ So \(SUDARSHANA\) will end up becoming: \(96, 134, 6, 9, 88, 123, 14, 21, 26, 39
 Given these numbers, how will you decrypt the message and get back \(SUDARSHANA\)? This is a well known cryptographic protocol called the <b>Hill Cipher</b>. You can read more online.
 </div>
 <button class="toggle">&#x2335;</button>
-<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M2Q1.</p></div></div>
+<div class="answer-wrap"><div class="answer">
+<h3>Decrypting the Hill Cipher</h3>
+<p>For the key matrix</p>
+<div class="math">\[K=\begin{pmatrix}2&3\\3&4\end{pmatrix}\]</div>
+<p>the determinant is</p>
+<div class="math">\[\det(K)=2\cdot4-3\cdot3=-1\ne0.\]</div>
+<p>Therefore,</p>
+<div class="math">\[K^{-1}=\frac1{-1}\begin{pmatrix}4&-3\\-3&2\end{pmatrix}=\begin{pmatrix}-4&3\\3&-2\end{pmatrix}.\]</div>
+<p>Apply this inverse to each cipher pair:</p>
+<table class="solution-table">
+<thead><tr><th>Cipher pair</th><th>Plain pair</th><th>Letters</th></tr></thead>
+<tbody>
+<tr><td>
+\((96,134)\)</td><td>\((-4\cdot96+3\cdot134,\ 3\cdot96-2\cdot134)=(18,20)\)</td><td>S U</td></tr>
+<tr><td>\((6,9)\)</td><td>\((3,0)\)</td><td>D A</td></tr>
+<tr><td>\((88,123)\)</td><td>\((17,18)\)</td><td>R S</td></tr>
+<tr><td>\((14,21)\)</td><td>\((7,0)\)</td><td>H A</td></tr>
+<tr><td>\((26,39)\)</td><td>\((13,0)\)</td><td>N A</td></tr>
+</tbody></table>
+<div class="math">\[\boxed{\text{Decrypted message: SUDARSHANA}}\]</div>
+<p>Thus multiplying by \(K^{-1}\) reverses the encryption. In a standard Hill cipher, the arithmetic is performed modulo 26.</p>
+</div></div>
 </div>
 <div class="card" id="M2Q2">
 <div class="question-id">M2Q2</div>
@@ -561,7 +582,17 @@ We encounter equations very often in our lives. Consider for example, the follow
 <div class="math">\[1A + 2C = 1000\]</div>
 </div>
 <button class="toggle">&#x2335;</button>
-<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M2Q2.</p></div></div>
+<div class="answer-wrap"><div class="answer">
+<h3>Solving the two simultaneous equations</h3>
+<p>Let \(A\) be the adult consumption and \(C\) the child consumption. The equations are</p>
+<div class="math">\[3A+C=1200,\qquad A+2C=1000.\]</div>
+<p>Multiply the second equation by 3 and subtract the first:</p>
+<div class="math">\[3A+6C-(3A+C)=3000-1200\implies5C=1800\implies C=360.\]</div>
+<p>Substituting into the first equation gives</p>
+<div class="math">\[3A+360=1200\implies A=280.\]</div>
+<div class="math">\[\boxed{A=280,\qquad C=360}.\]</div>
+<p>Check: \(3(280)+360=1200\) and \(280+2(360)=1000\). Hence the estimated consumption is Rs. 280 per adult and Rs. 360 per child.</p>
+</div></div>
 </div>
 <div class="card" id="M2Q3">
 <div class="question-id">M2Q3</div>
@@ -573,7 +604,14 @@ While we were taught the so called two variables and two unknowns, what if there
 <div class="math">\[1A + 1C = 900\]</div>
 </div>
 <button class="toggle">&#x2335;</button>
-<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M2Q3.</p></div></div>
+<div class="answer-wrap"><div class="answer">
+<h3>Why there is no exact solution</h3>
+<p>Subtract the third equation from the second:</p>
+<div class="math">\[ (A+2C)-(A+C)=1000-900\implies C=100.\]</div>
+<p>Then the third equation gives \(A=800\). But this pair fails the first equation:</p>
+<div class="math">\[3(800)+100=2500\ne1200.\]</div>
+<p>Therefore the three equations are inconsistent: no single pair \((A,C)\) satisfies all of them. The extra equation is incompatible with the first two, so we must seek a best-fit approximation rather than an exact solution.</p>
+</div></div>
 </div>
 <div class="card" id="M2Q4">
 <div class="question-id">M2Q4</div>
@@ -588,7 +626,16 @@ Note that the previous question can be modelled as a matrix:
 <div class="math">\[\begin{pmatrix} 3 & 1 \\ 1 & 2 \\ 1 & 1 \end{pmatrix} \begin{pmatrix} A \\ C \end{pmatrix} = \begin{pmatrix} 1200 \\ 1000 \\ 900 \end{pmatrix}\]</div>
 </div>
 <button class="toggle">&#x2335;</button>
-<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M2Q4.</p></div></div>
+<div class="answer-wrap"><div class="answer">
+<h3>Matrix model and least squares</h3>
+<p>The system can be written as \(X\vec{x}=\vec b\), where</p>
+<div class="math">\[X=\begin{pmatrix}3&1\\1&2\\1&1\end{pmatrix},\qquad \vec{x}=\begin{pmatrix}A\\C\end{pmatrix},\qquad \vec b=\begin{pmatrix}1200\\1000\\900\end{pmatrix}.\]</div>
+<p>Because the system is overdetermined and inconsistent, use the least-squares normal equations</p>
+<div class="math">\[X^TX\vec{x}=X^T\vec b,\qquad X^TX=\begin{pmatrix}11&6\\6&6\end{pmatrix},\quad X^T\vec b=\begin{pmatrix}5500\\4100\end{pmatrix}.\]</div>
+<p>Solving these normal equations gives the best-fit estimate</p>
+<div class="math">\[\boxed{A\approx280,\qquad C\approx403.33}.\]</div>
+<p>This minimizes the sum of the squared errors between the predicted and observed bills.</p>
+</div></div>
 </div>
 <div class="card" id="M2Q5">
 <div class="question-id">M2Q5</div>
@@ -596,7 +643,20 @@ Note that the previous question can be modelled as a matrix:
 One obvious way to solve this, is to guess the values <span style="font-size:18px">&#x1F609;</span>. Can you get closer to the solution by guessing? Note that there is no solution to this question. You can just reduce the error. Do you see why?
 </div>
 <button class="toggle">&#x2335;</button>
-<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M2Q5.</p></div></div>
+<div class="answer-wrap"><div class="answer">
+<h3>Guessing and reducing the error</h3>
+<p>For a guess \((A,C)\), calculate the error vector \(E=X\vec{x}-\vec b\). Some trials are:</p>
+<table class="solution-table">
+<thead><tr><th>Guess \((A,C)\)</th><th>Error in (1)</th><th>Error in (2)</th><th>Error in (3)</th></tr></thead>
+<tbody>
+<tr><td>\((300,300)\)</td><td>0</td><td>-100</td><td>-300</td></tr>
+<tr><td>\((280,360)\)</td><td>0</td><td>0</td><td>-260</td></tr>
+<tr><td>\((250,400)\)</td><td>-50</td><td>50</td><td>-250</td></tr>
+<tr><td>\((290,380)\)</td><td>50</td><td>50</td><td>-230</td></tr>
+<tr><td>\((270,420)\)</td><td>-30</td><td>110</td><td>-210</td></tr>
+</tbody></table>
+<p>No guess can make all three errors zero because the equations are inconsistent. The least-squares method gives the systematic best-fit result \(\boxed{A\approx280,\ C\approx403.33}\), rather than relying on trial and error.</p>
+</div></div>
 </div>
 <div class="card" id="M2Q6">
 <div class="question-id">M2Q6</div>
@@ -608,7 +668,15 @@ In the figure below:
 If 1000 people were to start in one state, what will be the distribution of people eventually?
 </div>
 <button class="toggle">&#x2335;</button>
-<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M2Q6.</p></div></div>
+<div class="answer-wrap"><div class="answer">
+<h3>Two-state Markov chain</h3>
+<p>From the diagram, take the transition matrix to be</p>
+<div class="math">\[P=\begin{pmatrix}0.6&0.4\\0.3&0.7\end{pmatrix}.\]</div>
+<p>The stationary distribution \(\vec\pi\) satisfies \(\vec\pi P=\vec\pi\) and \(\pi_1+\pi_2=1\). Thus</p>
+<div class="math">\[0.4\pi_1=0.3\pi_2\implies\pi_2=\frac43\pi_1\implies\boxed{\pi_1=\frac37,\quad\pi_2=\frac47}.\]</div>
+<p>For 1000 people, the eventual distribution is approximately:</p>
+<table class="solution-table"><thead><tr><th>State</th><th>People</th></tr></thead><tbody><tr><td>State 1</td><td>429</td></tr><tr><td>State 2</td><td>571</td></tr></tbody></table>
+</div></div>
 </div>
 <div class="card" id="M2Q7">
 <div class="question-id">M2Q7</div>
@@ -620,7 +688,16 @@ In the figure below:
 If 1000 people were to start in one state, what will be the distribution of people eventually?
 </div>
 <button class="toggle">&#x2335;</button>
-<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M2Q7.</p></div></div>
+<div class="answer-wrap"><div class="answer">
+<h3>Three-state Markov chain</h3>
+<p>Using the transition probabilities in the diagram,</p>
+<div class="math">\[P=\begin{pmatrix}0.5&0.3&0.2\\0.2&0.6&0.2\\0.1&0.1&0.8\end{pmatrix}.\]</div>
+<p>Solving \(\vec\pi P=\vec\pi\) together with \(\pi_1+\pi_2+\pi_3=1\) gives</p>
+<div class="math">\[\boxed{\pi_1=\frac3{14},\quad\pi_2=\frac4{14},\quad\pi_3=\frac7{14}}.\]</div>
+<p>Therefore, among 1000 people the long-run distribution is approximately:</p>
+<table class="solution-table"><thead><tr><th>State</th><th>People</th></tr></thead><tbody><tr><td>State 1</td><td>214</td></tr><tr><td>State 2</td><td>286</td></tr><tr><td>State 3</td><td>500</td></tr></tbody></table>
+<p>The stationary distribution describes the eventual proportions when the chain is ergodic.</p>
+</div></div>
 </div>
 <div class="module-heading" id="M3">Module 3</div>
 <div class="card" id="M3Q1">
@@ -630,7 +707,7 @@ If 1000 people were to start in one state, what will be the distribution of peop
 <br>Draw the vector \(\begin{bmatrix} 1 \\ 1 \end{bmatrix}\). Find out all those vectors which are perpendicular to this vector.
 </div>
 <button class="toggle">&#x2335;</button>
-<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M3Q1.</p></div></div>
+<div class="answer-wrap"><div class="answer"><h3>Perpendicular vectors</h3><p>A vector \(x,y\) is perpendicular to \( (1,1) \) exactly when its dot product is zero:</p><div class="math">\[x+y=0\]</div><p>Hence the complete solution is</p><div class="math">\[\boxed{\{(t,-t):t\in\mathbb{R}\}=\operatorname{span}\{(1,-1)\}}.\]</div><p>GeoGebra: plot <code>y=-x</code>. This line through the origin is perpendicular to \( (1,1) \).</p></div></div>
 </div>
 
 <div class="card" id="M3Q2">
@@ -640,7 +717,7 @@ Do you observe that we are asking for vectors \(\begin{bmatrix} x \\ y \end{bmat
 <div class="math">\[\begin{bmatrix} 1 & 1 \end{bmatrix} \begin{bmatrix} x \\ y \end{bmatrix} = 0\]</div>
 </div>
 <button class="toggle">&#x2335;</button>
-<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M3Q2.</p></div></div>
+<div class="answer-wrap"><div class="answer"><h3>Null-space interpretation</h3><p>The matrix equation is the scalar equation</p><div class="math">\[\begin{bmatrix}1&1\end{bmatrix}\begin{bmatrix}x\\y\end{bmatrix}=x+y=0.\]</div><p>Therefore \(y=-x\), and all solutions are \(\boxed{(x,y)=t(1,-1), t\in\mathbb{R}}\). This is the kernel (null space) of the row vector \[1\;1\].</p></div></div>
 </div>
 
 <div class="card" id="M3Q3">
@@ -649,7 +726,7 @@ Do you observe that we are asking for vectors \(\begin{bmatrix} x \\ y \end{bmat
 Use Geogebra and solve the above question with \(\begin{bmatrix} 1 \\ 1 \end{bmatrix}\) replaced by \(\begin{bmatrix} a \\ b \end{bmatrix}\). Use \((a, b)\) as parameters and check what happens to \((x, y)\).
 </div>
 <button class="toggle">&#x2335;</button>
-<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M3Q3.</p></div></div>
+<div class="answer-wrap"><div class="answer"><h3>General parameters</h3><p>We solve</p><div class="math">\[ax+by=0.\]</div><p>If \(b\ne0\), then \(y=-\frac{a}{b}x\), so</p><div class="math">\[\boxed{(x,y)=t(b,-a),\quad t\in\mathbb{R}}.\]</div><p>If \(b=0\) and \(a\ne0\), then \(x=0\), giving the \(y\)-axis. In every nonzero case the solution is the line through the origin in direction \( (b,-a) \), since \( (a,b)\cdot(b,-a)=0\).</p></div></div>
 </div>
 
 <div class="card" id="M3Q4">
@@ -659,7 +736,7 @@ What is \((x, y, z)\) satisfying the following equation? (Use Geogebra)
 <div class="math">\[\begin{bmatrix} 1 & 2 & 3 \end{bmatrix} \begin{bmatrix} x \\ y \\ z \end{bmatrix} = 0\]</div>
 </div>
 <button class="toggle">&#x2335;</button>
-<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M3Q4.</p></div></div>
+<div class="answer-wrap"><div class="answer"><h3>A plane in \(\mathbb{R}^3\)</h3><p>The equation is</p><div class="math">\[x+2y+3z=0.\]</div><p>Set \(y=s\) and \(z=t\). Then \(x=-2s-3t\), so</p><div class="math">\[\boxed{(x,y,z)=s(-2,1,0)+t(-3,0,1),\quad s,t\in\mathbb{R}}.\]</div><p>This is a two-dimensional plane through the origin with normal vector \( (1,2,3) \).</p></div></div>
 </div>
 
 <div class="card" id="M3Q5">
@@ -669,7 +746,7 @@ Use Geogebra and plot all the points in the set below.
 <div class="math">\[T = \{ \alpha (1, 2, 1) \mid \alpha \in \mathbb{R} \}\]</div>
 </div>
 <button class="toggle">&#x2335;</button>
-<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M3Q5.</p></div></div>
+<div class="answer-wrap"><div class="answer"><h3>Set \(T\)</h3><div class="math">\[T=\{\alpha(1,2,1):\alpha\in\mathbb{R}\}=\{(\alpha,2\alpha,\alpha):\alpha\in\mathbb{R}\}.\]</div><p>Thus \(T\) is a line through the origin with direction vector \( (1,2,1) \). It lies in the planes \(y=2x\) and \(z=x\). GeoGebra: use <code>Curve(t,2t,t,t,-10,10)</code>.</p></div></div>
 </div>
 
 <div class="card" id="M3Q6">
@@ -679,7 +756,7 @@ Use Geogebra and plot all the points in the set below.
 <div class="math">\[S = \{ \beta (2, 7, 3) \mid \beta \in \mathbb{R} \}\]</div>
 </div>
 <button class="toggle">&#x2335;</button>
-<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M3Q6.</p></div></div>
+<div class="answer-wrap"><div class="answer"><h3>Set \(S\)</h3><div class="math">\[S=\{\beta(2,7,3):\beta\in\mathbb{R}\}=\{(2\beta,7\beta,3\beta):\beta\in\mathbb{R}\}.\]</div><p>This is a line through the origin with direction vector \( (2,7,3) \) and direction ratios \(x:y:z=2:7:3\). GeoGebra: use <code>Curve(2t,7t,3t,t,-10,10)</code>.</p></div></div>
 </div>
 
 <div class="card" id="M3Q7">
@@ -689,7 +766,7 @@ Use Geogebra and plot all the points in the set below.
 <div class="math">\[W = \{ \alpha (1, 2, 1) + \beta (2, 7, 3) \mid \alpha, \beta \in \mathbb{R} \}\]</div>
 </div>
 <button class="toggle">&#x2335;</button>
-<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M3Q7.</p></div></div>
+<div class="answer-wrap"><div class="answer"><h3>Set \(W\)</h3><div class="math">\[W=\{\alpha(1,2,1)+\beta(2,7,3):\alpha,\beta\in\mathbb{R}\}.\]</div><p>Equivalently,</p><div class="math">\[(x,y,z)=(\alpha+2\beta, 2\alpha+7\beta, \alpha+3\beta).\]</div><p>The two direction vectors are not parallel, so \(W\) is a two-dimensional plane through the origin containing both lines \(T\) and \(S\).</p></div></div>
 </div>
 
 <div class="card" id="M3Q8">
@@ -700,7 +777,7 @@ In the set \(W\) of previous question, find out all the points \((x, y, z)\) sat
 where \((w_1, w_2, w_3) \in W\). Note that \(w_i\)'s are real numbers.
 </div>
 <button class="toggle">&#x2335;</button>
-<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M3Q8.</p></div></div>
+<div class="answer-wrap"><div class="answer"><h3>Vectors perpendicular to every vector in \(W\)</h3><p>It is enough to be perpendicular to both basis vectors of \(W\):</p><div class="math">\[x+2y+z=0,\qquad 2x+7y+3z=0.\]</div><p>From the first equation \(x=-2y-z\). Substitution gives \(3y+z=0\), so \(z=-3y\) and \(x=y\). Therefore</p><div class="math">\[\boxed{W^\perp=\{t(1,1,-3):t\in\mathbb{R}\}}.\]</div><p>This is a line, as \(\dim W+\dim W^\perp=2+1=3\).</p></div></div>
 </div>
 
 <div class="card" id="M3Q9">
@@ -711,7 +788,7 @@ Given the matrix \(A = \begin{bmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \\ 7 & 8 & 9 \end{
 Observe carefully, what has this question got to do with previous five questions in this module.
 </div>
 <button class="toggle">&#x2335;</button>
-<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M3Q9.</p></div></div>
+<div class="answer-wrap"><div class="answer"><h3>Null space of \(A\)</h3><p>Row reduction of \(A(x,y,z)^T=0\) gives \(y=-2z\) and \(x=z\). Thus, with \(z=t\),</p><div class="math">\[\boxed{N(A)=\{t(1,-2,1):t\in\mathbb{R}\}=\operatorname{span}\{(1,-2,1)\}}.\]</div><p>This is the same perpendicularity idea used earlier: the vector is perpendicular to every row of \(A\).</p></div></div>
 </div>
 
 <div class="card" id="M3Q10">
@@ -725,7 +802,7 @@ Given the matrix \(A = \begin{bmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \\ 7 & 8 & 9 \end{
 </ul>
 </div>
 <button class="toggle">&#x2335;</button>
-<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M3Q10.</p></div></div>
+<div class="answer-wrap"><div class="answer"><h3>Three fundamental sets</h3><p>\(\mathscr R\) is the span of the rows of \(A\), so it is the row space and has dimension 2. \(C\) is the span of the columns, so it is the column space and also has dimension 2. The third set is the null space of \(A\) (equivalently the null space of \(A^T\) under the row/column convention used here):</p><div class="math">\[N=\operatorname{span}\{(1,-2,1)\}.\]</div><p>The rank is 2 because \( (7,8,9)=2(4,5,6)-(1,2,3)\), and the nullity is 1.</p></div></div>
 </div>
 
 <div class="card" id="M3Q11">
@@ -734,7 +811,7 @@ Given the matrix \(A = \begin{bmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \\ 7 & 8 & 9 \end{
 Did you observe that every vector of \(\mathscr{R}\) is perpendicular to every vector of \(N\)?
 </div>
 <button class="toggle">&#x2335;</button>
-<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M3Q11.</p></div></div>
+<div class="answer-wrap"><div class="answer"><h3>Orthogonality</h3><p>Every vector of \(N\) has the form \(t(1,-2,1)\). Each generator of \(\mathscr R\) is perpendicular to this vector:</p><div class="math">\[(1,2,3)\cdot(1,-2,1)=0,\quad (4,5,6)\cdot(1,-2,1)=0,\quad (7,8,9)\cdot(1,-2,1)=0.\]</div><p>By linearity, every vector in \(\mathscr R\) is perpendicular to every vector in \(N\); they are orthogonal complements.</p></div></div>
 </div>
 
 <div class="card" id="M3Q12">
@@ -749,7 +826,7 @@ Consider the matrix \(B = \begin{bmatrix} 1 & 2 \\ 2 & 4 \end{bmatrix}\). Draw t
 </ul>
 </div>
 <button class="toggle">&#x2335;</button>
-<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M3Q12.</p></div></div>
+<div class="answer-wrap"><div class="answer"><h3>Images of the parallel lines</h3><p>For any input \( (x,y) \),</p><div class="math">\[B(x,y)=(x+2y, 2x+4y).\]</div><p>If \(x+2y=k\), then every point on that line is sent to the single point \( (k,2k) \). Therefore:</p><table class="solution-table"><thead><tr><th>Input line</th><th>Image</th></tr></thead><tbody><tr><td>\(x+2y=4\)</td><td>\((4,8)\)</td></tr><tr><td>\(x+2y=10\)</td><td>\((10,20)\)</td></tr><tr><td>\(x+2y=62\)</td><td>\((62,124)\)</td></tr><tr><td>\(x+2y=1800\)</td><td>\((1800,3600)\)</td></tr></tbody></table></div></div>
 </div>
 
 <div class="card" id="M3Q13">
@@ -758,7 +835,7 @@ Consider the matrix \(B = \begin{bmatrix} 1 & 2 \\ 2 & 4 \end{bmatrix}\). Draw t
 In general \(B = \begin{bmatrix} 1 & 2 \\ 2 & 4 \end{bmatrix} : \mathbb{R}^2 \to \mathbb{R}^2\), where does this function take \(2y + x = k\)? (where \(k\) is a constant)
 </div>
 <button class="toggle">&#x2335;</button>
-<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M3Q13.</p></div></div>
+<div class="answer-wrap"><div class="answer"><h3>General image</h3><p>If \(x+2y=k\), then</p><div class="math">\[B(x,y)=(x+2y,2x+4y)=(k,2k).\]</div><p>Thus the entire parallel line \(x+2y=k\) collapses to the single point \(\boxed{(k,2k)}\).</p></div></div>
 </div>
 
 <div class="card" id="M3Q14">
@@ -767,7 +844,7 @@ In general \(B = \begin{bmatrix} 1 & 2 \\ 2 & 4 \end{bmatrix} : \mathbb{R}^2 \to
 Given \(B = \begin{bmatrix} 1 & 2 \\ 2 & 4 \end{bmatrix} : \mathbb{R}^2 \to \mathbb{R}^2\). What is the range of this function?
 </div>
 <button class="toggle">&#x2335;</button>
-<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M3Q14.</p></div></div>
+<div class="answer-wrap"><div class="answer"><h3>Range of \(B\)</h3><p>Every output has the form</p><div class="math">\[B(x,y)=(x+2y,2x+4y)=(k,2k),\qquad k=x+2y\in\mathbb{R}.\]</div><p>Hence</p><div class="math">\[\boxed{\operatorname{Range}(B)=\{(k,2k):k\in\mathbb{R}\}=\{(u,v):v=2u\}.}\]</div><p>The range is a one-dimensional subspace of \(\mathbb{R}^2\).</p></div></div>
 </div>
 
 <div class="card" id="M3Q15">
@@ -778,7 +855,7 @@ You have achieved the required wisdom if you have realized that:
 "&nbsp;\(B\) collapses a dimension."
 </div>
 <button class="toggle">&#x2335;</button>
-<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M3Q15.</p></div></div>
+<div class="answer-wrap"><div class="answer"><h3>What “collapses a dimension” means</h3><p>The domain is two-dimensional, but the range is the one-dimensional line \(v=2u\). Every line \(x+2y=k\) in the domain is mapped to one point \( (k,2k)\), while the kernel \(x+2y=0\) is mapped to the origin.</p><div class="math">\[\boxed{\dim(\mathbb{R}^2)=2\longrightarrow\dim(\operatorname{Range}(B))=1.}\]</div><p>Since \(B\) has rank 1 and a one-dimensional null space, it removes one independent direction from the input.</p></div></div>
 </div>
 
 <div class="module-heading" id="M4">Module 4</div>
@@ -793,7 +870,7 @@ Given the matrix \(M = \begin{bmatrix} 1 & 3 \\ 2 & 6 \end{bmatrix}\). Use Geoge
 </ul>
 </div>
 <button class="toggle">&#x2335;</button>
-<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M4Q1.</p></div></div>
+<div class="answer-wrap"><div class="answer"><h3>Subspaces of M</h3><p>The matrix has determinant zero and rank 1. Since \((2,6)=2(1,3)\) and \((3,6)=3(1,2)\), the spaces are</p><div class="math">\[\mathscr{R}=\operatorname{span}\{(1,3)\}=\{(t,3t):t\in\mathbb{R}\},\qquad \mathscr{C}=\operatorname{span}\{(1,2)\}=\{(t,2t):t\in\mathbb{R}\}.\]</div><p>For the null space condition,\(x+3y=0\), so</p><div class="math">\[\mathscr{N}=\operatorname{span}\{(-3,1)\}.\]</div><p>GeoGebra shows three lines through the origin. The range/row-space lines are one-dimensional, and the null-space line is perpendicular to the corresponding row or column space.</p></div></div>
 </div>
 
 <div class="card" id="M4Q2">
@@ -802,7 +879,7 @@ Given the matrix \(M = \begin{bmatrix} 1 & 3 \\ 2 & 6 \end{bmatrix}\). Use Geoge
 Note that \(\mathscr{R}\) and \(\mathscr{N}\) are orthogonal.
 </div>
 <button class="toggle">&#x2335;</button>
-<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M4Q2.</p></div></div>
+<div class="answer-wrap"><div class="answer"><h3>Orthogonality of \(\mathscr{R}\) and \(\mathscr{N}\)</h3><p>Here \(\mathscr{R}=\operatorname{span}\{(1,3)\}\) and \(\mathscr{N}=\operatorname{span}\{(-3,1)\}\). Their generator vectors satisfy</p><div class="math">\[(1,3)\cdot(-3,1)=-3+3=0.\]</div><p>Therefore every vector in \(\mathscr{R}\) is perpendicular to every vector in \(\mathscr{N}\).</p></div></div>
 </div>
 
 <div class="card" id="M4Q3">
@@ -811,7 +888,7 @@ Note that \(\mathscr{R}\) and \(\mathscr{N}\) are orthogonal.
 What is the null-space of \(M = \begin{bmatrix} 1 & 3 \\ 2 & 6 \end{bmatrix}\) & the null-space of \(M^T\)?
 </div>
 <button class="toggle">&#x2335;</button>
-<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M4Q3.</p></div></div>
+<div class="answer-wrap"><div class="answer"><h3>Null spaces</h3><p>For \(M\binom{x}{y}=0\), the independent equation is \(x+3y=0\), giving</p><div class="math">\[N(M)=\operatorname{span}\{(-3,1)\}.\]</div><p>For \(M^T\binom{x}{y}=0\), the independent equation is \(x+2y=0\), so</p><div class="math">\[N(M^T)=\operatorname{span}\{(-2,1)\}.\]</div></div></div>
 </div>
 
 <div class="card" id="M4Q4">
@@ -820,7 +897,7 @@ What is the null-space of \(M = \begin{bmatrix} 1 & 3 \\ 2 & 6 \end{bmatrix}\) &
 Do you observe that \(C(M) \perp N(M^T)\), \(R(M) \perp N(M)\)? <span style="font-size:18px">&#x1F609;</span>
 </div>
 <button class="toggle">&#x2335;</button>
-<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M4Q4.</p></div></div>
+<div class="answer-wrap"><div class="answer"><h3>The two orthogonal decompositions</h3><p>The column space is \(C(M)=\operatorname{span}\{(1,2)\}\), while \(N(M^T)=\operatorname{span}\{(-2,1)\}\). Also, \(R(M)=\operatorname{span}\{(1,3)\}\) and \(N(M)=\operatorname{span}\{(-3,1)\}\). Indeed,</p><div class="math">\[(1,2)\cdot(-2,1)=0,\qquad (1,3)\cdot(-3,1)=0.\]</div><p>Thus \(C(M)\perp N(M^T)\) and \(R(M)\perp N(M)\).</p></div></div>
 </div>
 
 <div class="card" id="M4Q5">
@@ -829,7 +906,7 @@ Do you observe that \(C(M) \perp N(M^T)\), \(R(M) \perp N(M)\)? <span style="fon
 Consider \(A = \begin{bmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \\ 7 & 8 & 9 \end{bmatrix}\). What is \(N(A)\), \(C(A)\), \(R(A)\), \(N(A^T)\).
 </div>
 <button class="toggle">&#x2335;</button>
-<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M4Q5.</p></div></div>
+<div class="answer-wrap"><div class="answer"><h3>Four fundamental subspaces</h3><p>For the given matrix, row reduction gives \(y=-2z\) and \(x=z\). Hence</p><div class="math">\[N(A)=\operatorname{span}\{(1,-2,1)\},\qquad N(A^T)=\operatorname{span}\{(1,-2,1)\}.\]</div><p>The column and row spaces have rank 2:</p><div class="math">\[C(A)=\operatorname{span}\{(1,2,3),(4,5,6)\},\qquad R(A)=\operatorname{span}\{(1,4,7),(2,5,8)\}.\]</div><p>The rank-nullity check is \(2+1=3\).</p></div></div>
 </div>
 
 <div class="card" id="M4Q6">
@@ -846,7 +923,7 @@ Consider a \(4 \times 4\) matrix \(M : \mathbb{R}^4 \to \mathbb{R}^4\) whose ran
 Give an example each for all the above 5 cases.
 </div>
 <button class="toggle">&#x2335;</button>
-<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M4Q6.</p></div></div>
+<div class="answer-wrap"><div class="answer"><h3>Examples by range dimension</h3><p>Diagonal projection matrices provide examples:</p><table class="solution-table"><thead><tr><th>Range dimension</th><th>Example</th><th>Range</th></tr></thead><tbody><tr><td>4</td><td>\(I_4\)</td><td>\(\mathbb{R}^4\)</td></tr><tr><td>3</td><td>\(\operatorname{diag}(1,1,1,0)\)</td><td>\(\operatorname{span}\{e_1,e_2,e_3\}\)</td></tr><tr><td>2</td><td>\(\operatorname{diag}(1,1,0,0)\)</td><td>\(\operatorname{span}\{e_1,e_2\}\)</td></tr><tr><td>1</td><td>\(\mathbf{1}\mathbf{1}^T\), where \(\mathbf{1}=(1,1,1,1)^T\)</td><td>\(\operatorname{span}\{(1,1,1,1)\}\)</td></tr><tr><td>0</td><td>\(0_{4\times4}\)</td><td>\{0\}</td></tr></tbody></table></div></div>
 </div>
 
 <div class="card" id="M4Q7">
@@ -863,7 +940,7 @@ b) Show that if the range contains the points \((a, b, c)\) and \((d, e, f)\), t
 c) Note: \(S\) is of the dimension 1, but \(T\) needn't be of dimension 2. Think!
 </div>
 <button class="toggle">&#x2335;</button>
-<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M4Q7.</p></div></div>
+<div class="answer-wrap"><div class="answer"><h3>Closure of the range</h3><p>If \(A\mathbf v=(a,b,c)\), then for any scalar \(\alpha\), linearity gives</p><div class="math">\[A(\alpha\mathbf v)=\alpha A\mathbf v=\alpha(a,b,c).\]</div><p>Therefore the entire set \(S=\{\alpha(a,b,c):\alpha\in\mathbb{R}\}\) lies in the range. If \(A\mathbf v_1=(a,b,c)\) and \(A\mathbf v_2=(d,e,f)\), then</p><div class="math">\[A(\alpha\mathbf v_1+\beta\mathbf v_2)=\alpha(a,b,c)+\beta(d,e,f),\]</div><p>so all of \(T\) is also in the range. The dimension of \(T\) is 0, 1, or 2 depending on whether the two vectors are zero, dependent, or independent.</p></div></div>
 </div>
 
 <div class="module-heading" id="M5">Module 5</div>
@@ -873,7 +950,36 @@ c) Note: \(S\) is of the dimension 1, but \(T\) needn't be of dimension 2. Think
 Give an example of two 2-dim subspaces in \(\mathbb{R}^3\). Let us call it \(S_1, S_2\).
 </div>
 <button class="toggle">&#x2335;</button>
-<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M5Q1.</p></div></div>
+<div class="answer-wrap"><div class="answer">
+<h3>Two 2-dim subspaces of $\mathbb{R}^3$</h3>
+<p>Pick the two coordinate planes that share an $x$-axis:</p>
+<div class="math">\[
+S_1 = \operatorname{span}\!\left\{\begin{pmatrix} 1 \\ 0 \\ 0 \end{pmatrix},\;\begin{pmatrix} 0 \\ 1 \\ 0 \end{pmatrix}\right\} = \{(x, y, 0) : x, y \in \mathbb{R}\}\quad\text{($xy$-plane)}
+\]</div>
+<div class="math">\[
+S_2 = \operatorname{span}\!\left\{\begin{pmatrix} 1 \\ 0 \\ 0 \end{pmatrix},\;\begin{pmatrix} 0 \\ 0 \\ 1 \end{pmatrix}\right\} = \{(x, 0, z) : x, z \in \mathbb{R}\}\quad\text{($xz$-plane)}
+\]</div>
+<p>Both are 2-dimensional subspaces of $\mathbb{R}^3$, and they intersect along the $x$-axis.</p>
+<h3>Geometric picture</h3>
+<pre>      y ↑
+        |     S₁ (xy-plane)
+        |
+    S₄ ←•
+        |   ╱
+        | ╱   S₂ (xz-plane)
+        •───────────→ x
+       ╱|
+   S₃ ↙  |
+      z ↙ |
+        z ↓
+</pre>
+<h3>Take-aways</h3>
+<ul>
+<li>$S_1$ and $S_2$ are both <b>2-dimensional subspaces</b> of $\mathbb{R}^3$.</li>
+<li>They share the $x$-axis as their intersection: $S_1 \cap S_2 = \operatorname{span}\{(1,0,0)\}$.</li>
+<li>$\dim(S_1) + \dim(S_2) = 4 > \dim(\mathbb{R}^3) = 3$, so they <i>cannot</i> be perpendicular complements (unlike the pairs $S_1 \perp S_3$ and $S_2 \perp S_4$ that come next).</li>
+</ul>
+</div></div>
 </div>
 
 <div class="card" id="M5Q2">
@@ -882,7 +988,40 @@ Give an example of two 2-dim subspaces in \(\mathbb{R}^3\). Let us call it \(S_1
 Let \(S_3\) be all those vectors perpendicular to \(S_1\). \(S_4\) be that of \(S_2\).
 </div>
 <button class="toggle">&#x2335;</button>
-<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M5Q2.</p></div></div>
+<div class="answer-wrap"><div class="answer">
+<h3>Perpendicular complements $S_3$ and $S_4$</h3>
+<p>A vector $(x,y,z) \in S_3$ must be perpendicular to every generator of $S_1$:</p>
+<div class="math">\[
+\begin{cases}
+(x,y,z)\cdot(1,0,0) = 0 \\
+(x,y,z)\cdot(0,1,0) = 0
+\end{cases}
+\;\Rightarrow\; x = 0,\; y = 0
+\]</div>
+<div class="math">\[
+\boxed{\,S_3 = S_1^{\perp} = \operatorname{span}\!\left\{\begin{pmatrix} 0 \\ 0 \\ 1 \end{pmatrix}\right\}\quad\text{($z$-axis)}\,}
+\]</div>
+<p>Similarly for $S_4$, perpendicular to $S_2$:</p>
+<div class="math">\[
+\begin{cases}
+(x,y,z)\cdot(1,0,0) = 0 \\
+(x,y,z)\cdot(0,0,1) = 0
+\end{cases}
+\;\Rightarrow\; x = 0,\; z = 0
+\]</div>
+<div class="math">\[
+\boxed{\,S_4 = S_2^{\perp} = \operatorname{span}\!\left\{\begin{pmatrix} 0 \\ 1 \\ 0 \end{pmatrix}\right\}\quad\text{($y$-axis)}\,}
+\]</div>
+<h3>Take-aways</h3>
+<table class="solution-table">
+<thead><tr><th>Pair</th><th>Dimensions</th><th>Perpendicular?</th></tr></thead>
+<tbody>
+<tr><td>$S_1 \perp S_3$</td><td>$2 + 1 = 3$</td><td>✅</td></tr>
+<tr><td>$S_2 \perp S_4$</td><td>$2 + 1 = 3$</td><td>✅</td></tr>
+</tbody>
+</table>
+<p>So $S_1 \oplus S_3 = \mathbb{R}^3$ and $S_2 \oplus S_4 = \mathbb{R}^3$.</p>
+</div></div>
 </div>
 
 <div class="card" id="M5Q3">
@@ -891,7 +1030,29 @@ Let \(S_3\) be all those vectors perpendicular to \(S_1\). \(S_4\) be that of \(
 Find a matrix \(M\) whose Null-Space is \(S_3\), column space is \(S_2\).
 </div>
 <button class="toggle">&#x2335;</button>
-<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M5Q3.</p></div></div>
+<div class="answer-wrap"><div class="answer">
+<h3>Constructing the matrix $M$</h3>
+<p>We need:</p>
+<ul>
+<li>$\operatorname{Col}(M) = S_2$ (a 2-D plane, the $xz$-plane)</li>
+<li>$N(M) = S_3$ (a 1-D line, the $z$-axis)</li>
+</ul>
+<p>Since $N(M) \ni (0,0,1)$ means $M\begin{pmatrix}0\\0\\1\end{pmatrix} = \vec{0}$, the <b>third column</b> of $M$ must be zero.</p>
+<p>Since $\operatorname{Col}(M)$ must contain $(1,0,0)$ and $(0,0,1)$, choose the first two columns to be these:</p>
+<div class="math">\[
+\boxed{\,M = \begin{pmatrix} 1 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 1 & 0 \end{pmatrix}\,}
+\]</div>
+<h3>Verification</h3>
+<table class="solution-table">
+<thead><tr><th>Property</th><th>Computation</th><th>Result</th></tr></thead>
+<tbody>
+<tr><td>$M(x,y,z)$</td><td>$(x,\;0,\;y)^{T}$</td><td>—</td></tr>
+<tr><td>$\operatorname{Col}(M)$</td><td>$\operatorname{span}\{(1,0,0)^{T},\;(0,0,1)^{T}\}$ = $xz$-plane</td><td>$= S_2$ ✅</td></tr>
+<tr><td>$N(M)$</td><td>$\{(x,y,z) : x=0,\;y=0\}$ = $z$-axis</td><td>$= S_3$ ✅</td></tr>
+</tbody>
+</table>
+<p>🔍 <b>Geometric Description:</b> $M$ <i>swaps</i> the $y$- and $z$-coordinates while leaving $x$ alone.</p>
+</div></div>
 </div>
 
 <div class="card" id="M5Q4">
@@ -900,7 +1061,36 @@ Find a matrix \(M\) whose Null-Space is \(S_3\), column space is \(S_2\).
 What does \(S_1\) and \(S_4\) represent?
 </div>
 <button class="toggle">&#x2335;</button>
-<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M5Q4.</p></div></div>
+<div class="answer-wrap"><div class="answer">
+<h3>$S_1$ = Row space, $S_4$ = Left null space</h3>
+<p>Both come from the <b>other pair</b> of the four fundamental subspaces!</p>
+<table class="solution-table">
+<thead><tr><th>Subspace</th><th>Definition</th><th>$M$ value</th><th>Role</th></tr></thead>
+<tbody>
+<tr><td>$S_1 = \operatorname{Row}(M)$</td><td>rows are $(1,0,0),(0,0,0),(0,1,0)$</td><td>$\operatorname{span}\{(1,0,0),(0,1,0)\}$</td><td>$xy$-plane</td></tr>
+<tr><td>$S_4 = N(M^{T})$</td><td>$M^{T}(x,y,z)=(x,z,0)=\vec{0}$</td><td>$\operatorname{span}\{(0,1,0)\}$</td><td>$y$-axis</td></tr>
+</tbody>
+</table>
+<h3>Two orthogonal decompositions of $\mathbb{R}^3$</h3>
+<div class="math">\[
+\boxed{
+\begin{aligned}
+\mathbb{R}^3 &= \operatorname{Row}(M) \oplus N(M) = S_1 \oplus S_3 \quad(\dim 2 + 1) \\
+\mathbb{R}^3 &= \operatorname{Col}(M) \oplus N(M^{T}) = S_2 \oplus S_4 \quad(\dim 2 + 1)
+\end{aligned}
+}
+\]</div>
+<pre>        y ↑
+          |  ●  (S₁ = Row M)
+          | ╱|
+          |╱ |      M  →     ● (S₂ = Col M)
+          +——+——————→ x     ╱|
+          |  |             ╱ |
+          |  ●  (S₃=N M)  ●  |
+        z ↓                       (S₄=N(Mᵀ))
+</pre>
+<p>$S_1$ is the <b>domain view</b> of $M$ (what it acts on); $S_4$ is the <b>unused part of the codomain</b>.</p>
+</div></div>
 </div>
 
 <div class="card" id="M5Q5">
@@ -909,7 +1099,50 @@ What does \(S_1\) and \(S_4\) represent?
 Do you observe there is a bijection from \(S_1 \to S_2\)?
 </div>
 <button class="toggle">&#x2335;</button>
-<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M5Q5.</p></div></div>
+<div class="answer-wrap"><div class="answer">
+<h3>Bijection $S_1 \to S_2$</h3>
+<p><b>Claim:</b> $M\big|_{S_1}$ is a bijection from $S_1 \to S_2$.</p>
+<h4>Why it maps into $S_2$</h4>
+<p>Take any $(x, y, 0) \in S_1$:</p>
+<div class="math">\[
+M(x, y, 0) = (x, 0, y) \in S_2 \;\checkmark
+\]</div>
+<h4>Why it's one-to-one</h4>
+<p>If $M(x, y, 0) = (x, 0, y) = \vec{0}$, then $x = 0,\; y = 0$. So $(x, y, 0) = \vec{0}$. ✓</p>
+<h4>Why it's onto</h4>
+<p>Given any $(a, 0, c) \in S_2$, take $\vec{v} = (a, c, 0) \in S_1$:</p>
+<div class="math">\[
+M(a, c, 0) = (a, 0, c) \;\checkmark
+\]</div>
+<h4>Why this MUST happen (general principle)</h4>
+<table class="solution-table">
+<thead><tr><th>Property</th><th>Reason</th></tr></thead>
+<tbody>
+<tr><td>$\dim \operatorname{Row}(M) = \dim \operatorname{Col}(M) = \operatorname{rank}(M)$</td><td>Both equal rank</td></tr>
+<tr><td>$N(M) \cap \operatorname{Row}(M) = \{0\}$</td><td>$N(M) = \operatorname{Row}(M)^{\perp}$</td></tr>
+<tr><td>$M(\operatorname{Row}(M)) = \operatorname{Col}(M)$</td><td>Columns get "produced" by row-combinations</td></tr>
+</tbody>
+</table>
+<p>So $M$ restricted to its row space is a <b>linear isomorphism</b> onto its column space.</p>
+<div class="math">\[
+\boxed{\,S_1 \;\xrightarrow{\;\;M\;\;}\; S_2\;\;\text{is a bijection}\,}
+\]</div>
+<h3>The Big Picture</h3>
+<p>For any linear map $M : \mathbb{R}^3 \to \mathbb{R}^3$ with $\operatorname{rank}(M) = 2$:</p>
+<pre>                              M
+   Row(M) = S₁   ─────────────→   Col(M) = S₂
+        ⋂                              ⋂
+        ⊥                              ⊥
+        ⋂                              ⋂
+       N(M) = S₃    ←─"wasted"─   N(Mᵀ) = S₄
+</pre>
+<ul>
+<li>$S_3 \oplus S_1 = \mathbb{R}^3$  (split the <b>domain</b>)</li>
+<li>$S_4 \oplus S_2 = \mathbb{R}^3$  (split the <b>codomain</b>)</li>
+<li>$M : S_1 \to S_2$ is a <b>bijective linear map</b></li>
+</ul>
+<p>💡 <b>Take-away:</b> Every matrix is an <b>isomorphism between its row space and its column space</b>. All the "extra" dimensions live in the kernels $N(M)$ and $N(M^{T})$ and are <b>invisible</b> to the action of $M$.</p>
+</div></div>
 </div>
 <div class="module-heading" id="M6">Module 6</div>
 <div class="card" id="M6Q1">
@@ -927,7 +1160,123 @@ Think about it:
 </ul>
 </div>
 <button class="toggle">&#x2335;</button>
-<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M6Q1.</p></div></div>
+<div class="answer-wrap"><div class="answer">
+
+<h3>The real problem &mdash; a sparse ratings table</h3>
+<p>
+Imagine a streaming service with 10,000 movies and 5,000,000 users. Build a ratings matrix \(R\in\mathbb{R}^{5{,}000{,}000\times 10{,}000}\) where \(R_{ij}\) is user \(i\)'s rating of movie \(j\). More than 99% of the entries are blank, because most users have watched very few movies. The goal is to <b>predict the missing entries</b> and recommend, to each user, the movies with the highest predicted rating.
+</p>
+
+<h3>Hidden-feature intuition</h3>
+<p>
+Even though users never declare their tastes, the patterns in their ratings reveal them. For example, Alice loves action and dislikes romance; <i>Mad Max: Furiosa</i> has lots of action and almost no romance; so Alice is likely to rate it highly. Each user can be represented as a vector of <b>hidden features</b> (action, romance, &hellip;) and each movie as a vector in the same space; the predicted rating is the dot product of the two.
+</p>
+<pre>            "How romantic?" &uarr;
+                              |
+                  Movie B     &bull;
+                              |
+                  Alice &bull; &mdash;&rarr; predicted rating
+                              |
+                  Movie A     &bull;
+                              |
+                              &darr;&mdash;&mdash;&mdash;&mdash;&mdash;&rarr; "How action-packed?"
+</pre>
+
+<h3>Matrix factorization</h3>
+<p>
+Pick a small rank \(k\) (say \(k=20\)) and look for two much smaller matrices
+</p>
+<div class="math">\[
+U\in\mathbb{R}^{\,n\times k},\qquad V\in\mathbb{R}^{\,m\times k}
+\]</div>
+<p>
+where row \(U_i\) holds user \(i\)'s preferences and row \(V_j\) holds movie \(j\)'s features. The predicted rating of movie \(j\) by user \(i\) is
+</p>
+<div class="math">\[
+\boxed{\;\hat R_{ij}=U_i V_j^T=\sum_{a=1}^{k}U_{ia}V_{ja}\;}
+\]</div>
+<p>
+so the entire ratings matrix is approximated by
+</p>
+<div class="math">\[
+\boxed{\;R_{\,n\times m}\;\approx\;U_{\,n\times k}\,V^T_{\,k\times m}\;}
+\]</div>
+<p>
+Instead of one huge \(n\times m\) table, we now store two small \(n\times k\) and \(m\times k\) tables.
+</p>
+
+<h3>Finding \(U\) and \(V\) &mdash; minimizing squared error</h3>
+<p>
+Choose \(U,V\) so that \(UV^T\) matches the <i>known</i> entries as closely as possible:
+</p>
+<div class="math">\[
+\min_{U,V}\;\sum_{(i,j)\in\text{known}}\bigl(R_{ij}-U_i V_j^T\bigr)^2.
+\]</div>
+<p>
+A classic approach is <b>alternating least squares (ALS)</b>:
+</p>
+<ol>
+<li>Initialize \(U,V\) randomly.</li>
+<li>Repeat until convergence:
+<ol>
+<li>Fix \(V\) and solve for the best \(U\).</li>
+<li>Fix \(U\) and solve for the best \(V\).</li>
+</ol>
+</li>
+</ol>
+<p>
+Gradient descent on the same objective also works.
+</p>
+
+<h3>Concrete example</h3>
+<p>
+Suppose there are two hidden features, action and romance:
+</p>
+<table class="solution-table">
+<thead><tr><th>User</th><th>Action</th><th>Romance</th></tr></thead>
+<tbody>
+<tr><td>Alice</td><td>0.9</td><td>0.1</td></tr>
+<tr><td>Bob</td><td>0.1</td><td>0.9</td></tr>
+</tbody>
+</table>
+<table class="solution-table">
+<thead><tr><th>Movie</th><th>Action</th><th>Romance</th></tr></thead>
+<tbody>
+<tr><td>Mad Max</td><td>0.8</td><td>0.1</td></tr>
+<tr><td>Titanic</td><td>0.0</td><td>0.9</td></tr>
+</tbody>
+</table>
+<p>
+Alice's predicted preference for <i>Mad Max</i> is
+</p>
+<div class="math">\[
+U_{\text{Alice}}\cdot V_{\text{Mad Max}}=(0.9)(0.8)+(0.1)(0.1)=0.72+0.01=0.73.
+\]</div>
+<p>
+For <i>Titanic</i> it is
+</p>
+<div class="math">\[
+U_{\text{Alice}}\cdot V_{\text{Titanic}}=(0.9)(0.0)+(0.1)(0.9)=0.09.
+\]</div>
+<p>
+Since \(0.73>0.09\), the system recommends <i>Mad Max</i> to Alice.
+</p>
+
+<h3>Strengths and limitations</h3>
+<table class="solution-table">
+<thead><tr><th>Strengths</th><th>Limitations</th></tr></thead>
+<tbody>
+<tr><td>Handles huge sparse matrices</td><td>Cold-start for new users and movies</td></tr>
+<tr><td>Discovers hidden structure</td><td>Needs substantial data to be useful</td></tr>
+<tr><td>Personalized recommendations</td><td>Can be biased toward popular items</td></tr>
+<tr><td>Scales to millions of items</td><td>Can reinforce filter bubbles</td></tr>
+</tbody>
+</table>
+<p>
+Modern systems extend this idea with bias terms, side information (genre, age, demographics), and deep-learning variants such as <i>neural collaborative filtering</i>.
+</p>
+
+</div></div>
 </div>
 
 <div class="card" id="M6Q2">
@@ -945,7 +1294,109 @@ Think about it:
 </ul>
 </div>
 <button class="toggle">&#x2335;</button>
-<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M6Q2.</p></div></div>
+<div class="answer-wrap"><div class="answer">
+
+<h3>The real problem</h3>
+<p>
+The web has billions of pages. Which ones are most important? Larry Page and Sergey Brin (1996) made a circular observation precise with linear algebra:
+</p>
+<div class="math">\[\boxed{\;\text{A page is important if important pages link to it.}\;}\]</div>
+
+<h3>The web as a directed graph</h3>
+<p>
+Each page is a <b>node</b>; each hyperlink is a <b>directed edge</b>. Page \(A\) with two outgoing links, \(A\to B\) and \(A\to C\), means a visitor on \(A\) is equally likely to go to \(B\) or \(C\). A page with no outgoing links is a <b>dangling node</b>; a page that links only to itself is a <b>spider trap</b>.
+</p>
+
+<h3>The random surfer with damping</h3>
+<p>
+Imagine a random surfer who, on every step, with probability \(d\) (say \(d=0.85\)) clicks a random link on the current page, and with probability \(1-d\) &ldquo;teleports&rdquo; to a uniformly chosen page on the entire web. The <b>PageRank</b> of a page is the long-run probability that this surfer is on it.
+</p>
+
+<h3>The transition matrix</h3>
+<p>
+Build the column-stochastic matrix
+</p>
+<div class="math">\[
+M_{ij}=\begin{cases}
+\dfrac{1}{L_j}, & \text{if page } j \text{ links to page } i,\\[6pt]
+0, & \text{otherwise},
+\end{cases}
+\]</div>
+<p>
+where \(L_j\) is the number of outgoing links of page \(j\). Then the surfer's evolution is the random walk driven by \(M\). However, dangling nodes make one column all-zero (rank-deficient), and spider traps absorb the walker; we need damping to fix both problems.
+</p>
+
+<h3>The Google matrix</h3>
+<p>
+With damping, the <b>Google matrix</b> is
+</p>
+<div class="math">\[
+\boxed{\;G = d\,M + \dfrac{1-d}{N}\,\mathbf 1\,\mathbf 1^{\,T}\;},\qquad G\,p=p.
+\]</div>
+<p>
+Therefore, the PageRank vector \(p\) is precisely the <b>dominant eigenvector of \(G\)</b> &mdash; the eigenvector with eigenvalue \(1\).
+</p>
+
+<h3>Why we need damping</h3>
+<table class="solution-table">
+<thead><tr><th>Pathology</th><th>What happens</th><th>How damping fixes it</th></tr></thead>
+<tbody>
+<tr><td><b>Dangling nodes</b></td><td>A page with no outgoing links sinks probability until probability mass vanishes.</td><td>Teleport replaces lost mass with a uniform distribution.</td></tr>
+<tr><td><b>Spider traps</b></td><td>A self-link cluster absorbs all the random-walk mass.</td><td>Teleport lets the walker always escape.</td></tr>
+</tbody>
+</table>
+<p>
+Google's classic choice is \(d=0.85\).
+</p>
+
+<h3>Concrete example: four pages</h3>
+<p>
+Take four pages \(A,B,C,D\) with links \(A\to B,C\); \(B\to D\); \(C\to A,B\); \(D\to A,C\). Then \(L_A=2,\;L_B=1,\;L_C=2,\;L_D=2\), and
+</p>
+<div class="math">\[
+M = \begin{pmatrix}
+0   & 0   & 1/2 & 1/2 \\
+1/2 & 0   & 1/2 & 0   \\
+1/2 & 0   & 0   & 1/2 \\
+0   & 1   & 0   & 0
+\end{pmatrix}.
+\]</div>
+<p>
+With \(d=0.85\), \(N=4\) and \(J\) the all-ones matrix, the Google matrix is
+</p>
+<div class="math">\[
+G = 0.85\,M + \dfrac{0.15}{4}\,J.
+\]</div>
+<p>
+Solving \(Gp=p\) with \(\sum_i p_i=1\) gives the steady-state
+</p>
+<div class="math">\[
+\boxed{\;p \approx (0.290,\;0.197,\;0.290,\;0.224).\;}
+\]</div>
+<p>
+So pages \(A\) and \(C\) tie for the top, \(D\) comes next, \(B\) is last.
+</p>
+
+<h3>Why PageRank converges</h3>
+<p>
+By the <b>Perron&ndash;Frobenius theorem</b>, a column-stochastic matrix whose entries are strictly positive has a unique largest eigenvalue equal to \(1\), with a strictly positive eigenvector. The damping term guarantees strict positivity, so:
+</p>
+<ul>
+<li>\(G\) has spectral radius \(1\).</li>
+<li>The power iteration \(p^{(k+1)}=Gp^{(k)}\) converges to \(p\) from any starting vector.</li>
+</ul>
+<p>
+In symbols,
+</p>
+<div class="math">\[\;\lim_{k\to\infty}G^k\,p^{(0)}=p,\qquad p^{(0)}=\Bigl(\tfrac14,\tfrac14,\tfrac14,\tfrac14\Bigr).\;\]</div>
+<h3>Take-aways</h3>
+<ul>
+<li><b>Model:</b> web as a directed graph; link probability = adjacency &divide; outdegree.</li>
+<li><b>Fix pathologies:</b> damping + teleport with probability \(1-d\).</li>
+<li><b>Compute:</b> dominant eigenvector of \(G=dM+\tfrac{1-d}{N}\mathbf 1\mathbf 1^T\) via power iteration.</li>
+</ul>
+
+</div></div>
 </div>
 
 <div class="card" id="M6Q3">
@@ -963,7 +1414,137 @@ Think about it:
 </ul>
 </div>
 <button class="toggle">&#x2335;</button>
-<div class="answer-wrap"><div class="answer"><p>Placeholder solution for M6Q3.</p></div></div>
+<div class="answer-wrap"><div class="answer">
+
+<h3>The real problem &mdash; too many features</h3>
+<p>
+Modern data is enormous: a picture may have millions of pixels, a document thousands of words, a genome millions of base pairs, a customer hundreds of attributes. Most of this is redundant or noisy. The goal of dimensionality reduction is to
+</p>
+<ul>
+<li>compress the data,</li>
+<li>visualize high-dimensional data,</li>
+<li>remove noise,</li>
+<li>discover hidden structure.</li>
+</ul>
+
+<h3>The geometry: find the important directions</h3>
+<p>
+Imagine data points scattered in 3D but lying close to a 2D plane. Although the data is 3D, almost all of its information is 2D. We want to <b>find that plane</b>, then describe each point with 2 numbers instead of 3.
+</p>
+
+<h3>Singular Value Decomposition (SVD)</h3>
+<p>
+Every matrix \(A\) of size \(m\times n\) can be factored as
+</p>
+<div class="math">\[\boxed{\;A \;=\; U\,\Sigma\,V^T.\;}\]</div>
+<p>
+Here:
+</p>
+<ul>
+<li>\(U\) and \(V\) are <b>orthogonal</b> matrices (their columns are unit vectors perpendicular to each other),</li>
+<li>\(\Sigma\) is a diagonal matrix with non-negative singular values \(\sigma_1\ge\sigma_2\ge\cdots\ge0\).</li>
+</ul>
+<p>
+Geometrically, \(A\) first <b>rotates</b> by \(V^T\), then <b>stretches</b> along the axes by \(\Sigma\), and finally <b>rotates again</b> by \(U\).
+</p>
+
+<h3>The best low-rank approximation</h3>
+<p>
+Keep only the top \(k\) singular values:
+</p>
+<div class="math">\[\;A\;\approx\;U_k\,\Sigma_k\,V_k^T.\;\]</div>
+<p>
+By the <b>Eckart&ndash;Young theorem</b> (1936), this is the best possible rank-\(k\) approximation to \(A\) in the least-squares sense.
+</p>
+<table class="solution-table">
+<thead><tr><th>Form</th><th>Size</th><th>Storage</th></tr></thead>
+<tbody>
+<tr><td>Original \(A\)</td><td>\(m\times n\)</td><td>\(mn\) numbers</td></tr>
+<tr><td>Rank-\(k\) SVD</td><td>top \(k\) factors</td><td>\(k(m+n+1)\) numbers</td></tr>
+</tbody>
+</table>
+<p>
+For \(m=n=1000\) and \(k=10\): storage drops from \(10^6\) numbers to roughly \(2\times10^4\) &mdash; a <b>50&times; compression</b>.
+</p>
+
+<h3>What SVD reveals</h3>
+<pre>   A            U               Σ              Vᵀ
+┌──────┐     ┌──────┐       ┌──────┐       ┌──────┐
+│ data │  =  │ axes │   ·   │ σ₁ ▪ │   ·   │ axes │ᵀ
+│      │     │      │       │  σ₂ │       │      │
+└──────┘     └──────┘       └──────┘       └──────┘
+                ↑              ↑               ↑
+           "input axes"   "importance"    "output axes"
+                          (big to small)
+</pre>
+<p>
+The singular values \(\sigma_i\) rank the importance of each direction. If \(\sigma_1\) is huge and \(\sigma_3,\sigma_4,\ldots\) are tiny, only two dimensions carry the signal.
+</p>
+
+<h3>Principal Component Analysis (PCA)</h3>
+<p>
+PCA is SVD applied to <i>centered</i> data, and is equivalent to using the eigen-decomposition of the covariance matrix:
+</p>
+<ol>
+<li><b>Center:</b> subtract the mean so each feature has mean \(0\).</li>
+<li><b>Covariance:</b> form \(C=\tfrac{1}{n}X^TX\).</li>
+<li><b>Eigen:</b> compute eigenvalues and eigenvectors of \(C\).</li>
+<li><b>Interpret:</b> the eigenvectors are the <b>principal components</b> (directions of maximum variance); the eigenvalues tell how much variance each captures.</li>
+<li><b>Project:</b> project the data onto the top \(k\) eigenvectors.</li>
+</ol>
+<p>
+Each data point ends up described by \(k\) numbers instead of \(d\) features.
+</p>
+
+<h3>Concrete example: image compression</h3>
+<p>
+A grayscale image is just a matrix whose entries are pixel values. Take a \(1000\times1000\) image and apply SVD:
+</p>
+<div class="math">\[\;A_{1000\times1000}=U\,\Sigma\,V^T.\;\]</div>
+<p>
+Keep only the top 50 singular values:
+</p>
+<div class="math">\[\;A\;\approx\;U_{1000\times 50}\,\Sigma_{50\times 50}\,V_{1000\times 50}^T.\;\]</div>
+<p>
+Storage: \(10^6\) numbers become roughly \(50\times2000=10^5\) numbers &mdash; a <b>10&times; smaller</b> file with negligible visible difference. The discarded singular values correspond to fine details and noise that the eye barely notices.
+</p>
+
+<h3>Other applications of SVD / PCA</h3>
+<table class="solution-table">
+<thead><tr><th>Application</th><th>How SVD / PCA is used</th></tr></thead>
+<tbody>
+<tr><td>Recommender systems</td><td>\(A\approx U_k\Sigma_kV_k^T\) where \(A\) is the ratings matrix</td></tr>
+<tr><td>Eigenfaces (face recognition)</td><td>Top SVD vectors span the &ldquo;face space&rdquo;</td></tr>
+<tr><td>NLP / LSA</td><td>SVD of a term&ndash;document matrix gives topic-like vectors</td></tr>
+<tr><td>Noise removal</td><td>Keep top singular values, discard small ones</td></tr>
+<tr><td>Genetics</td><td>PCA of SNP data reveals population structure</td></tr>
+<tr><td>Finance</td><td>PCA of asset returns extracts risk factors</td></tr>
+<tr><td>Image search</td><td>Compare images in low-dimensional SVD space</td></tr>
+<tr><td>Anomaly detection</td><td>Large reconstruction error flags an anomaly</td></tr>
+</tbody>
+</table>
+
+<h3>How all three M6 topics connect</h3>
+<p>
+The singular value decomposition is the unifying idea:
+</p>
+<div class="math">\[
+\underbrace{A}_{\text{data matrix}} \;=\; \underbrace{U}_{\text{features}}\;\underbrace{\Sigma}_{\text{importance}}\;\underbrace{V^T}_{\text{features}}.
+\]</div>
+<table class="solution-table">
+<thead><tr><th>Application</th><th>The matrix \(A\)</th><th>What you do</th></tr></thead>
+<tbody>
+<tr><td>Recommender</td><td>user &times; item ratings</td><td>Predict \(R_{ij}\) from low-rank approximation</td></tr>
+<tr><td>PageRank</td><td>web link graph</td><td>Top eigenvector of \(G\), the modified \(A\)</td></tr>
+<tr><td>Dimensionality reduction</td><td>data &times; features</td><td>Truncate SVD to top \(k\) values</td></tr>
+<tr><td>PCA</td><td>data &times; features</td><td>Top eigenvectors of \(X^TX\)</td></tr>
+</tbody>
+</table>
+<p>
+<strong>The big take-away:</strong> once a problem is expressed as a matrix, SVD (and its cousins) usually gives a principled way to compress it, find hidden structure, and make predictions.
+</p>
+
+</div></div>
 </div>
 
 </main></div>
@@ -981,16 +1562,35 @@ toggles.forEach((btn, index) => {
  btn.setAttribute("aria-label", "Reveal answer");
 });
 
-document.querySelector(".main").addEventListener("click", event => {
- const btn = event.target.closest(".toggle");
- if (!btn) return;
+ document.querySelector(".main").addEventListener("click", event => {
+  const btn = event.target.closest(".toggle");
+  if (!btn) return;
 
- const wrap = btn.nextElementSibling;
- const open = wrap.hidden;
- wrap.hidden = !open;
- btn.classList.toggle("open", open);
- btn.setAttribute("aria-expanded", String(open));
- btn.setAttribute("aria-label", open ? "Hide answer" : "Reveal answer");
+  const wrap = btn.nextElementSibling;
+  const open = wrap.hidden;
+  wrap.hidden = !open;
+  btn.classList.toggle("open", open);
+  btn.setAttribute("aria-expanded", String(open));
+  btn.setAttribute("aria-label", open ? "Hide answer" : "Reveal answer");
+ });
+</script>
+<script>
+document.querySelectorAll('.sidebar a[href^="#"]').forEach(a => {
+ a.addEventListener('click', e => {
+  const id = a.getAttribute('href').slice(1);
+  const t = document.getElementById(id);
+  if (!t) return;
+  e.preventDefault();
+  const html = document.documentElement;
+  const prev = html.style.scrollBehavior;
+  html.style.scrollBehavior = 'auto';
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+   document.body.getBoundingClientRect();
+   t.scrollIntoView({ block: 'start' });
+   history.pushState(null, '', '#' + id);
+   html.style.scrollBehavior = prev;
+  }));
+ });
 });
 </script>
 <script>
