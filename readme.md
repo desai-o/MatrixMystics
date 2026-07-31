@@ -29,9 +29,7 @@ Made with ❤️ for the love of teaching & learning.
 
 The page lays out **53 curated questions across 6 modules**, walking learners from the very basics of plotting points and lines, all the way to advanced applications like **PageRank**, **Recommender Systems**, and **Principal Component Analysis (PCA)**.
 
-Every question is rendered as a card with a **"Reveal Explanation"** toggle. Explanations (where populated) use **KaTeX** for beautiful math rendering and **GeoGebra** links for hands-on visualization.
-
-> ⚠️ Note: As of this version, only the explanation for **M1Q1** is fully written. All other answers contain a placeholder (`Placeholder solution for MxQy.`) and are meant to be filled in collaboratively.
+Every question is rendered as a card with a **"Reveal Explanation"** toggle. Explanations use **KaTeX** for beautiful math rendering and **GeoGebra** links for hands-on visualization. All **53 questions** now have fully worked solutions — the question bank is complete.
 
 ---
 
@@ -58,7 +56,7 @@ The course is organized into **6 modules** with a total of **53 questions**:
 ### Module 1 — *Foundations of Plots, Functions & Matrices* (16 questions)
 From real-world data → algebraic relationships → plotting on a coordinate plane. Introduces lines through the origin, slope, intercept, simultaneous equations as `Ax = b`, and the notion of a matrix as a function.
 
-Highlights: **M1Q1** (the only fully-written solution), **M1Q7** (matrix form of simultaneous equations), **M1Q16** (matrix sending multiple points to the origin).
+Highlights: **M1Q1** (Ram & Lakshman savings story), **M1Q7** (matrix form of simultaneous equations), **M1Q16** (matrix sending multiple points to the origin).
 
 ### Module 2 — *Applications: Ciphers & Markov Chains* (7 questions)
 - **Hill Cipher** decryption using matrix inverse.
@@ -111,7 +109,10 @@ The HTML file is organized into the following logical sections (see the source):
 2. `<aside class="sidebar">` — module index & external links.
 3. `<main class="main">` — module headings + question cards.
 4. `<canvas class="fireworks">` — overlay for the fireworks easter egg.
-5. Two `<script>` blocks — toggle behavior + fireworks animation.
+5. Three `<script>` blocks at the bottom of the file:
+   - **Reveal/hide toggle** — wires each caret button to its `answer-wrap` (with ARIA `aria-controls` / `aria-expanded` for accessibility).
+   - **Smooth-scroll sidebar** — intercepts in-page anchor clicks, uses `scrollIntoView` inside a double `requestAnimationFrame`, and updates the URL with `history.pushState`.
+   - **Fireworks animation** — Canvas-based particle system triggered by clicking the *"Made with ❤️…"* footer.
 
 ---
 
@@ -146,7 +147,7 @@ The file is fully readable as plain text — no transpilation step required.
 1. **Browse the sidebar** to jump to any module / question.
 2. **Read the question** in the card.
 3. **Open GeoGebra** (link at the top of the sidebar) and try to solve it visually.
-4. **Click "Reveal Explanation"** to see the worked solution (where available).
+4. **Click "Reveal Explanation"** to see the worked solution.
 5. **Discuss** difficult questions in the [Matrix Mystics Discourse forum](https://vicharanashala.discourse.group/t/matrix-mystics-discussion-forum/516).
 6. **Easter egg:** Click the *"Made with ❤️ …"* line at the top of the main panel to enjoy a fireworks show. 🎆
 
@@ -198,7 +199,7 @@ Because everything lives in one file, customization is straightforward:
 | Theme colors | Inline `<style>` block — search for the hex codes listed in [UI & Layout](#-ui--layout). |
 | Add a question | Copy any `<div class="card" id="MxQy">…</div>` block and update the `id`, question text, and explanation. |
 | Add a new module | Append a `<details>` to the sidebar and a new `<div class="module-heading" id="M7">Module 7</div>` in `<main>`. |
-| Replace the fireworks | Edit the second `<script>` block at the bottom of the file. |
+| Replace the fireworks | Edit the third `<script>` block at the bottom of the file. |
 | Change fonts | Update the `font-family` in the `body` selector inside the inline `<style>`. |
 | Pin a question open | Override the `hidden` attribute for that specific card (e.g. set `wrap.hidden = false` directly in the initialization script) and add the `open` class to its caret button so the rotation animation matches the visible state. |
 
